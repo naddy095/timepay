@@ -1,17 +1,40 @@
 package com.example.timepay.timepay;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 public class Accounts extends ActionBarActivity {
+    EditText emailAddressET, phoneNumberET;
+    Button continueB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accounts);
+
+        initializeView();
+
+        continueB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Accounts.this,ChooseAccountType.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    private void initializeView() {
+        emailAddressET = (EditText)findViewById(R.id.etEmailAddress);
+        phoneNumberET = (EditText)findViewById(R.id.etPhoneNumber);
+        continueB = (Button)findViewById(R.id.bContinue);
     }
 
 
