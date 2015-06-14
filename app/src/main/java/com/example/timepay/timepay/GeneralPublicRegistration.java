@@ -1,47 +1,47 @@
 package com.example.timepay.timepay;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.app.DatePickerDialog;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 
-public class Accounts extends ActionBarActivity {
-    EditText emailAddressET, phoneNumberET;
-    Button continueB;
+public class GeneralPublicRegistration extends ActionBarActivity {
 
+    EditText expiryDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accounts);
+        setContentView(R.layout.activity_general_public_registration);
 
-        initializeView();
 
-        continueB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Accounts.this,GeneralPublicRegistration.class);
-                startActivity(i);
-            }
-        });
+        initialize();
+        /*DatePickerDialog datePickerDialog=new DatePickerDialog(this, listener, year, month, day);
+        DatePicker datepicker=datePickerDialog.getDatePicker();
+        //datep.removeViewAt(0);
+        LinearLayout v1=(LinearLayout)datepicker.getChildAt(0);
+        LinearLayout v2=(LinearLayout)v1.getChildAt(0);
+        View v3=v2.getChildAt(1);
+        v3.setVisibility(View.GONE);
+        Toast.makeText(this, "" + v3.getClass().getName() + "\ncount " + v2.getChildCount(), 1).show();
+        datePickerDialog.show();*/
     }
 
-    private void initializeView() {
-        emailAddressET = (EditText)findViewById(R.id.etEmailAddress);
-        phoneNumberET = (EditText)findViewById(R.id.etPhoneNumber);
-        continueB = (Button)findViewById(R.id.bContinue);
+    private void initialize() {
+        expiryDate = (EditText)findViewById(R.id.etExpiryDate);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_accounts, menu);
+        getMenuInflater().inflate(R.menu.menu_general_public_registration, menu);
         return true;
     }
 

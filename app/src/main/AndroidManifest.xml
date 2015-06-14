@@ -21,6 +21,10 @@
             android:name=".ChooseAccountType"
             android:label="@string/title_activity_choose_account_type" >
         </activity>
+        <activity
+            android:name=".GeneralPublicRegistration"
+            android:label="@string/title_activity_general_public_registration" >
+        </activity>
     </application>
 
 </manifest>

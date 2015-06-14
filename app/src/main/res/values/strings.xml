@@ -7,6 +7,11 @@
     <string name="signup_continue_btn">continue</string>
     <string name="choose_account_header">Choose an account type here</string>
     <string name="title_activity_choose_account_type">ChooseAccountType</string>
-
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_general_public_registration">GeneralPublicRegistration</string>
+    <string name="GPR_header">Fill in the details</string>
+    <string name="FullName_hint">Full Name</string>
+    <string name="card_subheader">Card details</string>
+    <string name="pan_hint">PAN Number</string>
+    <string name="cardnumber_hint">Card number</string>
 </resources>
