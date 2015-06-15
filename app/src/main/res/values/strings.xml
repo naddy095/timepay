@@ -9,6 +9,7 @@
     <string name="title_activity_choose_account_type">ChooseAccountType</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_general_public_registration">GeneralPublicRegistration</string>
+    <string name="title_activity_accounts">Accounts</string>
     <string name="GPR_header">Fill in the details</string>
     <string name="FullName_hint">Full Name</string>
     <string name="card_subheader">Card details</string>
