@@ -16,6 +16,7 @@ import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
+import com.example.Utils.SharedPreferenceHandler;
 
 
 public class SplashScreenActivity extends Activity {
@@ -27,8 +28,10 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.i("Outputs","IMEI  " + getIMEI()+" MAC  "+getMacAddress()+"Email  " + getEmail(context));
-
+		getIMEI();
+        getMacAddress();
+        getEmail(context);
+        Log.i("Outputs","IMEI  " + SharedPreferenceHandler.readValue(this.context,"IMEI")+" MAC  "+SharedPreferenceHandler.readValue(this.context,"Mac Address")+"Email  " + SharedPreferenceHandler.readValue(this.context,"Synced Mail"));
 
 		// Remove the Title Bar
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -79,13 +82,15 @@ public class SplashScreenActivity extends Activity {
 
 		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
 		String imei=telephonyManager.getDeviceId();
-		return imei;
+        SharedPreferenceHandler.writeValue(this.context,"IMEI",imei);
+        return imei;
 	}
 
 	private String getMacAddress() {
 		WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		WifiInfo wInfo = wifiManager.getConnectionInfo();
 		String macAddress = wInfo.getMacAddress();
+        SharedPreferenceHandler.writeValue(this.context,"Mac Address",macAddress);
 		return macAddress;
 	}
 
@@ -97,6 +102,7 @@ public class SplashScreenActivity extends Activity {
 		if (account == null) {
 			return null;
 		} else {
+            SharedPreferenceHandler.writeValue(context,"Synced Mail",account.name);
 			return account.name;
 		}
 	}
