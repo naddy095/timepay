@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.Utils.SharedPreferenceHandler;
+
 
 public class Accounts extends ActionBarActivity {
     EditText emailAddressET, phoneNumberET;
@@ -21,6 +23,7 @@ public class Accounts extends ActionBarActivity {
         setContentView(R.layout.activity_accounts);
 
         initializeView();
+        emailAddressET.setText(SharedPreferenceHandler.readValue(this,"Mac Address"));
 
         continueB.setOnClickListener(new View.OnClickListener() {
             @Override

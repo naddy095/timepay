@@ -1,13 +1,14 @@
 package com.example.timepay.timepay;
  
+import java.util.Properties;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import android.accounts.Account;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.util.Property;
 import android.view.Window;
 
 import android.telephony.TelephonyManager;
@@ -16,6 +17,8 @@ import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
+import com.example.Utils.FileIOHandler;
+import com.example.Utils.PropertyHandler;
 import com.example.Utils.SharedPreferenceHandler;
 
 
@@ -24,16 +27,21 @@ public class SplashScreenActivity extends Activity {
 	// Set Duration of the Splash Screen
 	long Delay = 8000;
 	final Context context=this;
+    PropertyHandler propReader;
  
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        Properties myProperty;
 		getIMEI();
         getMacAddress();
         getEmail(context);
-        Log.i("Outputs","IMEI  " + SharedPreferenceHandler.readValue(this.context,"IMEI")+" MAC  "+SharedPreferenceHandler.readValue(this.context,"Mac Address")+"Email  " + SharedPreferenceHandler.readValue(this.context,"Synced Mail"));
-
+        //Log.i("Outputs","IMEI  " + SharedPreferenceHandler.readValue(this.context,"IMEI")+" MAC  "+SharedPreferenceHandler.readValue(this.context,"Mac Address")+"Email  " + SharedPreferenceHandler.readValue(this.context,"Synced Mail"));
+        Log.i("Outputs","IMEI  " + FileIOHandler.readValue(this.context,"IMEI")+" MAC  "+FileIOHandler.readValue(this.context,"Mac Address")+"Email  " + FileIOHandler.readValue(this.context,"Synced Mail"));
+        propReader = new PropertyHandler(context);
+        myProperty = propReader.getMyProperties("url.properties");
 		// Remove the Title Bar
+        Log.i("Sign in url :",myProperty.getProperty("signin"));
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		// Get the view from splash_screen.xml
@@ -77,12 +85,11 @@ public class SplashScreenActivity extends Activity {
 
 
 
-	private String getIMEI() {
-
-
+	private String getIMEI(){
 		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
 		String imei=telephonyManager.getDeviceId();
-        SharedPreferenceHandler.writeValue(this.context,"IMEI",imei);
+        //SharedPreferenceHandler.writeValue(this.context,"IMEI",imei);
+        FileIOHandler.writeValue(this.context,"IMEI",imei);
         return imei;
 	}
 
@@ -90,7 +97,8 @@ public class SplashScreenActivity extends Activity {
 		WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		WifiInfo wInfo = wifiManager.getConnectionInfo();
 		String macAddress = wInfo.getMacAddress();
-        SharedPreferenceHandler.writeValue(this.context,"Mac Address",macAddress);
+        //SharedPreferenceHandler.writeValue(this.context,"Mac Address",macAddress);
+        FileIOHandler.writeValue(this.context,"Mac Address",macAddress);
 		return macAddress;
 	}
 
@@ -98,11 +106,11 @@ public class SplashScreenActivity extends Activity {
 	static String getEmail(Context context) {
 		AccountManager accountManager = AccountManager.get(context);
 		Account account = getAccount(accountManager);
-
 		if (account == null) {
 			return null;
 		} else {
-            SharedPreferenceHandler.writeValue(context,"Synced Mail",account.name);
+            //SharedPreferenceHandler.writeValue(context,"Synced Mail",account.name);
+            FileIOHandler.writeValue(context, "Synced Mail", account.name);
 			return account.name;
 		}
 	}
