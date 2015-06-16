@@ -20,6 +20,7 @@ import android.net.wifi.WifiManager;
 import com.example.Utils.FileIOHandler;
 import com.example.Utils.PropertyHandler;
 import com.example.Utils.SharedPreferenceHandler;
+import com.example.componentservices.ComponentBaseServices;
 
 
 public class SplashScreenActivity extends Activity {
@@ -33,14 +34,14 @@ public class SplashScreenActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         Properties myProperty;
-		getIMEI();
-        getMacAddress();
-        getEmail(context);
+        ComponentBaseServices baseServices = new ComponentBaseServices();
+        baseServices.getIMEI(this.context);
+        baseServices.getMacAddress(this.context);
+        baseServices.getEmail(this.context);
         //Log.i("Outputs","IMEI  " + SharedPreferenceHandler.readValue(this.context,"IMEI")+" MAC  "+SharedPreferenceHandler.readValue(this.context,"Mac Address")+"Email  " + SharedPreferenceHandler.readValue(this.context,"Synced Mail"));
         Log.i("Outputs","IMEI  " + FileIOHandler.readValue(this.context,"IMEI")+" MAC  "+FileIOHandler.readValue(this.context,"Mac Address")+"Email  " + FileIOHandler.readValue(this.context,"Synced Mail"));
         propReader = new PropertyHandler(context);
         myProperty = propReader.getMyProperties("url.properties");
-		// Remove the Title Bar
         Log.i("Sign in url :",myProperty.getProperty("signin"));
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -80,51 +81,4 @@ public class SplashScreenActivity extends Activity {
 		//RunSplash.schedule(ShowSplash, Delay);
 		th.start(); // start the thread
 	}
-
-
-
-
-
-	private String getIMEI(){
-		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-		String imei=telephonyManager.getDeviceId();
-        //SharedPreferenceHandler.writeValue(this.context,"IMEI",imei);
-        FileIOHandler.writeValue(this.context,"IMEI",imei);
-        return imei;
-	}
-
-	private String getMacAddress() {
-		WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-		WifiInfo wInfo = wifiManager.getConnectionInfo();
-		String macAddress = wInfo.getMacAddress();
-        //SharedPreferenceHandler.writeValue(this.context,"Mac Address",macAddress);
-        FileIOHandler.writeValue(this.context,"Mac Address",macAddress);
-		return macAddress;
-	}
-
-
-	static String getEmail(Context context) {
-		AccountManager accountManager = AccountManager.get(context);
-		Account account = getAccount(accountManager);
-		if (account == null) {
-			return null;
-		} else {
-            //SharedPreferenceHandler.writeValue(context,"Synced Mail",account.name);
-            FileIOHandler.writeValue(context, "Synced Mail", account.name);
-			return account.name;
-		}
-	}
-
-	private static Account getAccount(AccountManager accountManager) {
-		Account[] accounts = accountManager.getAccountsByType("com.google");
-		Account account;
-		if (accounts.length > 0) {
-			account = accounts[0];
-		} else {
-			account = null;
-		}
-		return account;
-	}
-
-
 }
