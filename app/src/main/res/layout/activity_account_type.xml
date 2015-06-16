@@ -31,6 +31,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:spinnerMode="dropdown" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="You must agree with the terms and conditions"
+                android:id="@+id/cbIAgree" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,7 +57,8 @@
             android:layout_gravity="bottom"
             android:textColorHighlight="#FFFFEE"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+           />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
