@@ -9,10 +9,15 @@
     <string name="title_activity_choose_account_type">ChooseAccountType</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_general_public_registration">GeneralPublicRegistration</string>
+    <string name="title_activity_vender_registration">VendorRegistration</string>
     <string name="title_activity_accounts">Accounts</string>
     <string name="GPR_header">Fill in the details</string>
     <string name="FullName_hint">Full Name</string>
     <string name="card_subheader">Card details</string>
     <string name="pan_hint">PAN Number</string>
     <string name="cardnumber_hint">Card number</string>
+    <string name="registered_companyName_hint">Registered Company Name</string>
+    <string name="shopPublic_brandName_hint">Shop Public Brand Name</string>
+    <string name="account_no_hint">Account Number</string>
+    <string name="ifsc_code_hint">IFSC Code</string>
 </resources>
