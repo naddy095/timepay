@@ -28,7 +28,7 @@ public class Accounts extends ActionBarActivity {
         continueB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Accounts.this,VendorRegistration.class);
+                Intent i = new Intent(Accounts.this,ChooseAccountType.class);
                 startActivity(i);
             }
         });

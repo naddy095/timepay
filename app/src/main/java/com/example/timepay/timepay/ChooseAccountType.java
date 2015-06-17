@@ -1,5 +1,6 @@
 package com.example.timepay.timepay;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -16,8 +17,8 @@ import android.widget.Toast;
 public class ChooseAccountType extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner spAccountType;
-    private String[] Account_Type = {"General Public Registration","Vendor Registration","Privilege Vendor Registration"};
-    Button BAccountType;
+    private String[] Account_Type = {"General Public Registration", "Vendor Registration", "Privilege Vendor Registration"};
+    Button bAccountType;
     CheckBox cbIAgree;
     Integer position;
 
@@ -25,51 +26,64 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_type);
+        initializeView();
 
-        spAccountType = (Spinner)findViewById(R.id.spAccountType);
-        ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,Account_Type);
+        ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Account_Type);
         adapter_state.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spAccountType.setAdapter(adapter_state);
         spAccountType.setOnItemSelectedListener(this);
 
-        BAccountType = (Button)findViewById(R.id.bContinue);
-        cbIAgree = (CheckBox)findViewById(R.id.cbIAgree);
-
-        BAccountType.setOnClickListener(new View.OnClickListener() {
+        bAccountType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(cbIAgree.isChecked())
-                {
-                    Toast.makeText(ChooseAccountType.this,"check box is checked",Toast.LENGTH_LONG).show();
+                if (cbIAgree.isChecked()) {
+                    //Toast.makeText(ChooseAccountType.this, "check box is checked", Toast.LENGTH_LONG).show();
+                    Intent i= null;
+                    switch (position) {
 
-                switch(position)
-                {
-                    case 0: Toast.makeText(ChooseAccountType.this,"General Public Registration",Toast.LENGTH_SHORT).show();
-                        break;
+                        case 0:
+                            //Toast.makeText(ChooseAccountType.this, "General Public Registration", Toast.LENGTH_SHORT).show();
+                            i = new Intent(ChooseAccountType.this,GeneralPublicRegistration.class);
+                            //i.putExtra("AccountType","GPR");
+                            startActivity(i);
+                            break;
 
-                    case 1:Toast.makeText(ChooseAccountType.this,"Vendor Registration",Toast.LENGTH_SHORT).show();
-                        break;
+                        case 1:
+                            // Toast.makeText(ChooseAccountType.this, "Vendor Registration", Toast.LENGTH_SHORT).show();
+                            i = new Intent(ChooseAccountType.this,VendorRegistration.class);
+                            //i.putExtra("AccountType","VR");
+                            startActivity(i);
+                            break;
 
-                    case 2:Toast.makeText(ChooseAccountType.this,"Privilege Vendor Registration",Toast.LENGTH_SHORT).show();
-                        break;
+                        case 2:
+                            //TODO
+                            // Toast.makeText(ChooseAccountType.this, "Privilege Vendor Registration", Toast.LENGTH_SHORT).show();
+                            break;
 
+                    }
+                } else {
+                    Toast.makeText(ChooseAccountType.this, "Please accept terms and conditions", Toast.LENGTH_LONG).show();
                 }
-
-
-                }
-                else
-                {
-                    Toast.makeText(ChooseAccountType.this,"Please click on check box to proceed further",Toast.LENGTH_LONG).show();
-                }
-
-
-
-
             }
         });
-
     }
 
+    private void initializeView() {
+        bAccountType = (Button) findViewById(R.id.bContinue);
+        cbIAgree = (CheckBox) findViewById(R.id.cbIAgree);
+        spAccountType = (Spinner) findViewById(R.id.spAccountType);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        spAccountType.setSelection(i);
+        position = i;
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,17 +105,5 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        spAccountType.setSelection(i);
-        position=i;
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 }
