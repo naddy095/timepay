@@ -3,28 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="5dp"
+    android:background="@android:color/white"
     tools:context="com.example.timepay.timepay.GeneralPublicRegistration">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_gravity="center">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginTop="25dp"
                     android:text="@string/GPR_header"
                     android:textAppearance="@android:style/TextAppearance.Large"
@@ -46,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
-                    android:hint="Complete Address"
+                    android:hint="@string/CompleteAddress_Hint"
                     android:minEms="20"
                     android:minLines="2" />
 
@@ -65,11 +67,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:paddingLeft="0dp"
+                    android:paddingLeft="3dp"
                     android:text="@string/card_subheader"
-                    android:textAppearance="@android:style/TextAppearance.Large"
-                    android:textColor="@android:color/darker_gray"
-                    android:textStyle="bold" />
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical|bottom" />
 
                 <EditText
                     android:id="@+id/etCardNumber"
@@ -85,10 +88,11 @@
                     android:id="@+id/etCardFullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="5dp"
                     android:ems="10"
+                    android:hint="@string/CardName_hint"
                     android:inputType="textPersonName"
-                    android:text="mohammad nadeem" />
+                    />
                 <!--need to auto complete from full name field-->
                 <EditText
                     android:id="@+id/etExpiryDate"
@@ -98,26 +102,32 @@
                     android:layout_marginTop="5dp"
                     android:hint="Card Expiry" />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <Button
-                    android:id="@+id/bContinue"
-                    android:layout_width="368dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="0"
-                    android:background="@android:color/holo_blue_light"
-                    android:paddingLeft="5dp"
-                    android:text="@string/signup_continue_btn"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textColorHighlight="#FFFFEE"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+
         </LinearLayout>
+
     </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center|bottom"
+        android:gravity="bottom"
+        android:weightSum="0"
+        android:layout_weight="0">
+        <Button
+            android:id="@+id/bContinue"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="0"
+            android:background="@android:color/holo_blue_light"
+            android:text="@string/signup_continue_btn"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textColorHighlight="#FFFFEE"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+    </LinearLayout>
 </LinearLayout>

@@ -20,4 +20,7 @@
     <string name="shopPublic_brandName_hint">Shop Public Brand Name</string>
     <string name="account_no_hint">Account Number</string>
     <string name="ifsc_code_hint">IFSC Code</string>
+    <string name="CompleteAddress_Hint">Complete Address</string>
+    <string name="CardName_hint">Name on card</string>
+    <string name="PhoneNumber_hint">Phone Number</string>
 </resources>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="5dp"
+    android:background="@android:color/white"
     tools:context="com.example.timepay.timepay.GeneralPublicRegistration">
 
     <ScrollView
@@ -19,12 +19,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingLeft="5dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="20dp"
                     android:layout_marginTop="25dp"
                     android:text="@string/GPR_header"
                     android:textAppearance="@android:style/TextAppearance.Large"
@@ -35,7 +36,7 @@
                     android:id="@+id/etRegisteredCompanyName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:ems="10"
                     android:hint="@string/registered_companyName_hint"
                     android:inputType="textPersonName" />
@@ -86,10 +87,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:paddingLeft="0dp"
+                    android:paddingLeft="3dp"
                     android:text="@string/card_subheader"
-                    android:textAppearance="@android:style/TextAppearance.Large"
-                    android:textColor="@android:color/darker_gray"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold" />
 
                 <EditText
@@ -106,10 +107,10 @@
                     android:id="@+id/etCardFullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="5dp"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="mohammad nadeem" />
+                    android:hint="Name on card" />
                 <!--need to auto complete from full name field-->
                 <EditText
                     android:id="@+id/etExpiryDate"
@@ -122,16 +123,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_gravity="center|bottom"
+                android:paddingBottom="5dp">
                 <Button
                     android:id="@+id/bContinue"
                     android:layout_width="368dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
+                    android:layout_gravity="center_horizontal|bottom"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="0"
                     android:background="@android:color/holo_blue_light"
-                    android:paddingLeft="5dp"
                     android:text="@string/signup_continue_btn"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"

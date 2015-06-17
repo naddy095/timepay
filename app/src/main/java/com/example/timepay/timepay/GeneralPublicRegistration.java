@@ -14,12 +14,11 @@ import android.widget.Toast;
 
 public class GeneralPublicRegistration extends ActionBarActivity {
 
-    EditText expiryDate;
+    EditText expiryDate, fullName,cardName,panNumber,address;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_public_registration);
-
 
         initialize();
         /*DatePickerDialog datePickerDialog=new DatePickerDialog(this, listener, year, month, day);
@@ -31,10 +30,28 @@ public class GeneralPublicRegistration extends ActionBarActivity {
         v3.setVisibility(View.GONE);
         Toast.makeText(this, "" + v3.getClass().getName() + "\ncount " + v2.getChildCount(), 1).show();
         datePickerDialog.show();*/
+
+        //To populate the Card Name from Full Name
+        fullName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus){
+                    //Toast.makeText(getApplicationContext(), "got unfocus", Toast.LENGTH_LONG).show();
+                    cardName.setText("");
+                    cardName.setText(fullName.getText());
+                }else{
+                    //Toast.makeText(getApplicationContext(), "got the focus", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void initialize() {
         expiryDate = (EditText)findViewById(R.id.etExpiryDate);
+        fullName = (EditText)findViewById(R.id.etFullName);
+        cardName = (EditText)findViewById(R.id.etCardFullName);
+        panNumber = (EditText)findViewById(R.id.etPANNumber);
+        address = (EditText)findViewById(R.id.etAddress);
     }
 
 
@@ -51,12 +68,10 @@ public class GeneralPublicRegistration extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

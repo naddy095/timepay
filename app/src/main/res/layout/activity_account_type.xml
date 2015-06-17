@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="5dp">
+    android:background="@android:color/white"
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="5dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -23,7 +25,8 @@
             android:text="@string/choose_account_header"
             android:textAppearance="@android:style/TextAppearance.Large"
             android:textColor="@android:color/black"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_gravity="center" />
 
         <Spinner
             android:id="@+id/spAccountType"
@@ -42,19 +45,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="5dp"
+            android:gravity="bottom"
+            android:layout_gravity="center|bottom">
         <Button
             android:id="@+id/bContinue"
             android:layout_width="368dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_weight="0"
             android:background="@android:color/holo_blue_light"
-            android:paddingLeft="5dp"
             android:text="@string/signup_continue_btn"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="bottom"
+            android:layout_gravity="center_horizontal|bottom"
             android:textColorHighlight="#FFFFEE"
             android:textSize="18sp"
             android:textStyle="bold"
