@@ -14,7 +14,8 @@
     <string name="GPR_header">Fill in the details</string>
     <string name="FullName_hint">Full Name</string>
     <string name="card_subheader">Card details</string>
-    <string name="pan_hint">PAN Number</string>
+    <string name="pan_hint">PAN No</string>
+    <string name="pan_upload">Upload PAN</string>
     <string name="cardnumber_hint">Card number</string>
     <string name="registered_companyName_hint">Registered Company Name</string>
     <string name="shopPublic_brandName_hint">Shop Public Brand Name</string>
