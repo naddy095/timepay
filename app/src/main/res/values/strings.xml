@@ -24,4 +24,5 @@
     <string name="CompleteAddress_Hint">Complete Address</string>
     <string name="CardName_hint">Name on card</string>
     <string name="PhoneNumber_hint">Phone Number</string>
+    <string name="AddressCharacterFilter">qwertyuiopasdfghjklzxcvbnm QWERTYUIOPASDFGHJKLZXCVBNM1234567890#/.,()</string>
 </resources>

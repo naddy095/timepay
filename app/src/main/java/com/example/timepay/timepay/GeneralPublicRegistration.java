@@ -3,6 +3,7 @@ package com.example.timepay.timepay;
 import android.app.DatePickerDialog;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.example.Utils.ApplyInputFilters;
 
 
 public class GeneralPublicRegistration extends ActionBarActivity {
@@ -37,8 +40,10 @@ public class GeneralPublicRegistration extends ActionBarActivity {
             public void onFocusChange(View view, boolean hasFocus) {
                 if(!hasFocus){
                     //Toast.makeText(getApplicationContext(), "got unfocus", Toast.LENGTH_LONG).show();
+                    cardName.setEnabled(true);
                     cardName.setText("");
                     cardName.setText(fullName.getText());
+                    cardName.setEnabled(false);
                 }else{
                     //Toast.makeText(getApplicationContext(), "got the focus", Toast.LENGTH_LONG).show();
                 }
@@ -52,6 +57,8 @@ public class GeneralPublicRegistration extends ActionBarActivity {
         cardName = (EditText)findViewById(R.id.etCardFullName);
         panNumber = (EditText)findViewById(R.id.etPANNumber);
         address = (EditText)findViewById(R.id.etAddress);
+        ApplyInputFilters applyFilters = new ApplyInputFilters(getString(R.string.AddressCharacterFilter));
+        address.setFilters(new InputFilter[]{applyFilters});
     }
 
 

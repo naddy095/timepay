@@ -91,6 +91,7 @@
                     android:layout_marginTop="5dp"
                     android:ems="10"
                     android:hint="@string/CardName_hint"
+                    android:enabled="false"
                     android:inputType="textPersonName"
                     />
                 <!--need to auto complete from full name field-->
