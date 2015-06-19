@@ -23,6 +23,18 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".HomePage"
+            android:label="HomePage">
+        </activity>
+        <activity
+            android:name=".Webview"
+            android:label="WebView">
+        </activity>
+
+        <activity android:name=".PrivilageVendorRegistration"
+            android:label="PrivilageVendorRegistration"></activity>
+
+        <activity
             android:name=".Accounts"
             android:label="@string/title_activity_accounts">
     </activity>

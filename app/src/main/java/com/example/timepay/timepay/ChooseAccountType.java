@@ -3,14 +3,17 @@ package com.example.timepay.timepay;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -21,12 +24,27 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
     Button bAccountType;
     CheckBox cbIAgree;
     Integer position;
+    WebView wvIAccpet;
+    TextView tvIAgree;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_type);
         initializeView();
+
+        //String checkBoxText = "you must agree with the <a href='http://www.google.com' > Terms and Conditions.</a>";
+        String checkBoxText = "you must agree with the Terms and Conditions.";
+        tvIAgree.setText(Html.fromHtml(checkBoxText));
+        tvIAgree.setClickable(true);
+        tvIAgree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChooseAccountType.this, Webview.class);
+                intent.putExtra("wvTerms", getString(R.string.wvIAree));
+                startActivity(intent);
+            }
+        });
 
         ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Account_Type);
         adapter_state.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -56,7 +74,9 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
                             break;
 
                         case 2:
-                            //TODO
+                            i = new Intent(ChooseAccountType.this,PrivilageVendorRegistration.class);
+                            startActivity(i);
+
                             // Toast.makeText(ChooseAccountType.this, "Privilege Vendor Registration", Toast.LENGTH_SHORT).show();
                             break;
 
@@ -72,6 +92,9 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
         bAccountType = (Button) findViewById(R.id.bContinue);
         cbIAgree = (CheckBox) findViewById(R.id.cbIAgree);
         spAccountType = (Spinner) findViewById(R.id.spAccountType);
+        wvIAccpet = (WebView)findViewById(R.id.webview);
+
+        tvIAgree= (CheckBox)findViewById(R.id.cbIAgree);
     }
 
     @Override

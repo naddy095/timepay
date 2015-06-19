@@ -18,9 +18,11 @@
     <string name="pan_upload">Upload PAN</string>
     <string name="cardnumber_hint">Card number</string>
     <string name="registered_companyName_hint">Registered Company Name</string>
+    <string name="registered_companyID_hint">Registered Company ID</string>
     <string name="shopPublic_brandName_hint">Shop Public Brand Name</string>
     <string name="account_no_hint">Account Number</string>
     <string name="ifsc_code_hint">IFSC Code</string>
+    <string name="company_id_hint">Company ID</string>
     <string name="CompleteAddress_Hint">Complete Address</string>
     <string name="CardName_hint">Name on card</string>
     <string name="PhoneNumber_hint">Phone Number</string>
@@ -28,4 +30,7 @@
     <string name="expiry_month">Month</string>
     <string name="expiry_year">Year</string>
     <string name="AddressCharacterFilter">qwertyuiopasdfghjklzxcvbnm QWERTYUIOPASDFGHJKLZXCVBNM1234567890#/.,()</string>
+    <string name="wvIAree">https://www.google.co.in</string>
+    <string name="IFSC">https://www.google.co.in</string>
+    <string name="CompanyID">https://www.google.co.in</string>
 </resources>

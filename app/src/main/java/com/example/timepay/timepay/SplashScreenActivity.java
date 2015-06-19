@@ -1,26 +1,18 @@
 package com.example.timepay.timepay;
  
-import java.util.Properties;
-import java.util.Timer;
-
-import android.accounts.Account;
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
-import android.util.Log;
-import android.util.Property;
-import android.view.Window;
-
-import android.telephony.TelephonyManager;
-import android.accounts.AccountManager;
 import android.content.Context;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Window;
 
 import com.example.Utils.FileIOHandler;
 import com.example.Utils.PropertyHandler;
-import com.example.Utils.SharedPreferenceHandler;
 import com.example.componentservices.ComponentBaseServices;
+
+import java.util.Properties;
+import java.util.Timer;
 
 
 public class SplashScreenActivity extends Activity {
@@ -69,7 +61,7 @@ public class SplashScreenActivity extends Activity {
 				}
 				finally {
 					Intent i = new Intent(SplashScreenActivity.this,
-							Accounts.class);
+							HomePage.class);
 					startActivity(i);
 					finish();
 				}

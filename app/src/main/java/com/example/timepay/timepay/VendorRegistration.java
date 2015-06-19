@@ -30,7 +30,8 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
     private static final int LOAD_IMAGE_FROM_GALLERY=1;
     EditText expiryDate;
     EditText panNo;
-    Button uploadPAN ;
+    Button uploadPAN;
+    Button searchIFSCCode ;
     TextView expiryMonth;
     TextView expiryYear;
     ImageView imageOfPANCard;
@@ -46,6 +47,7 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
         uploadPAN.setOnClickListener(this);
         expiryMonth.setOnClickListener(this);
         expiryYear.setOnClickListener(this);
+        searchIFSCCode.setOnClickListener(this);
         Log.i("VendorRegistration", "afterListener");
 
     }
@@ -57,6 +59,8 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
         uploadPAN=(Button)findViewById(R.id.btnUploadPAN);
         panNo=(EditText)findViewById(R.id.etPANNumber);
         imageOfPANCard=(ImageView)findViewById(R.id.ivPANImage);
+        searchIFSCCode = (Button)findViewById(R.id.btnIFSCCode);
+
     }
 
 
@@ -133,6 +137,13 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             builder.setInverseBackgroundForced(true);
             builder.create();
             builder.show();
+        }
+
+        if(view == searchIFSCCode)
+        {
+            Intent intent = new Intent(VendorRegistration.this, Webview.class);
+            intent.putExtra("wvTerms", getString(R.string.IFSC));
+            startActivity(intent);
         }
     }
 
