@@ -13,11 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.Utils.ApplyInputFilters;
+import com.example.Utils.GroupedInputFormatWatcher;
 
 
 public class GeneralPublicRegistration extends ActionBarActivity {
 
-    EditText expiryDate, fullName,cardName,panNumber,address;
+    EditText expiryDate, fullName,cardName,panNumber,address,cardNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,8 @@ public class GeneralPublicRegistration extends ActionBarActivity {
         cardName = (EditText)findViewById(R.id.etCardFullName);
         panNumber = (EditText)findViewById(R.id.etPANNumber);
         address = (EditText)findViewById(R.id.etAddress);
+        cardNumber = (EditText)findViewById(R.id.etCardNumber);
+        cardNumber.addTextChangedListener(new GroupedInputFormatWatcher(cardNumber));
         ApplyInputFilters applyFilters = new ApplyInputFilters(getString(R.string.AddressCharacterFilter));
         address.setFilters(new InputFilter[]{applyFilters});
     }

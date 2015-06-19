@@ -82,7 +82,8 @@
                     android:layout_marginTop="5dp"
                     android:ems="10"
                     android:hint="@string/cardnumber_hint"
-                    android:inputType="number" />
+                    android:inputType="text"
+                    android:digits="09876 54321"/>
 
                 <EditText
                     android:id="@+id/etCardFullName"
