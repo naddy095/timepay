@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -29,6 +31,8 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
     EditText expiryDate;
     EditText panNo;
     Button uploadPAN ;
+    TextView expiryMonth;
+    TextView expiryYear;
     ImageView imageOfPANCard;
     Intent builderIntent;
     @Override
@@ -40,12 +44,16 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
         initialize();
         Log.i("VendorRegistration", "beforeListener");
         uploadPAN.setOnClickListener(this);
+        expiryMonth.setOnClickListener(this);
+        expiryYear.setOnClickListener(this);
         Log.i("VendorRegistration", "afterListener");
 
     }
 
     private void initialize() {
         expiryDate = (EditText)findViewById(R.id.etExpiryDate);
+        expiryYear=(TextView)findViewById(R.id.tvExpiryYear);
+        expiryMonth=(TextView)findViewById(R.id.tvExpiryMonth);
         uploadPAN=(Button)findViewById(R.id.btnUploadPAN);
         panNo=(EditText)findViewById(R.id.etPANNumber);
         imageOfPANCard=(ImageView)findViewById(R.id.ivPANImage);
@@ -82,20 +90,46 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             final CharSequence[] uploadPanOptions={"Take a Picture","Choose From Gallery"};
             AlertDialog.Builder builder=new AlertDialog.Builder(VendorRegistration.this);
 
-                builder.setTitle("Choose Options");
-                builder.setItems(uploadPanOptions, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (uploadPanOptions[i].equals("Take a Picture")){
-                            builderIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            startActivityForResult(builderIntent, CAPTURE_IMAGE_FROM_CAMERA);
+            builder.setTitle("Choose Options");
+            builder.setItems(uploadPanOptions, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    if (uploadPanOptions[i].equals("Take a Picture")){
+                        builderIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(builderIntent, CAPTURE_IMAGE_FROM_CAMERA);
 
-                        }else if (uploadPanOptions[i].equals("Choose From Gallery")){
-                            builderIntent=new Intent (Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                            startActivityForResult(builderIntent, LOAD_IMAGE_FROM_GALLERY);
-                        }
+                    }else if (uploadPanOptions[i].equals("Choose From Gallery")){
+                        builderIntent=new Intent (Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(builderIntent, LOAD_IMAGE_FROM_GALLERY);
                     }
-                });
+                }
+            });
+            builder.setInverseBackgroundForced(true);
+            builder.create();
+            builder.show();
+        }else if (view==expiryMonth) {
+            final CharSequence[] mnth={"01(Jan)","02(Feb)","03(Mar)","04(Apr)","05(May)","06(Jun)","07(Jul)","08(Aug)","09(Sep)","10(Oct)","11(Nov)","12(Dec)"};
+            AlertDialog.Builder builder = new AlertDialog.Builder(VendorRegistration.this);
+            builder.setTitle("Select Month");
+            builder.setItems(mnth, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(getApplicationContext(), "You have selected  " + mnth[which], Toast.LENGTH_LONG).show();
+
+                }
+            });
+            builder.setInverseBackgroundForced(true);
+            builder.create();
+            builder.show();
+        }
+        if (view==expiryYear) {
+            final CharSequence[] yr={"2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026"};
+            AlertDialog.Builder builder = new AlertDialog.Builder(VendorRegistration.this);
+            builder.setTitle("Select Year");
+            builder.setItems(yr, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(getApplicationContext(), "You have selected  " + yr[which], Toast.LENGTH_LONG).show();
+                }
+            });
             builder.setInverseBackgroundForced(true);
             builder.create();
             builder.show();
