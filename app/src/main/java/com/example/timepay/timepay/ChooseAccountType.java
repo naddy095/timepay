@@ -34,7 +34,7 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
 
         //String checkBoxText = "you must agree with the <a href='http://www.google.com' > Terms and Conditions.</a>";
         //String checkBoxText = "you must agree with the Terms and Conditions.";
-       // tvIAgree.setText(Html.fromHtml(checkBoxText));
+       // tvIAgree.setText(Html.fromHtml(checkBoxText))   ;
         tvIAgree.setClickable(true);
         tvIAgree.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +43,7 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
                 intent.putExtra("URL", getString(R.string.wvIAree));
                 intent.putExtra("Text",getString(R.string.Text_view_IAgree));
                 startActivity(intent);
+
             }
         });
 
