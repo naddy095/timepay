@@ -37,8 +37,6 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
     EditText  fullName,cardName,panNumber,address,cardNumber;
     Button searchIFSCCode ;
     TextView expiryMonth ,expiryYear;
-    Button uploadPAN;
-    ImageView imageOfPANCard;
     Intent builderIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +44,6 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
         setContentView(R.layout.activity_general_public_registration);
 
         initialize();
-        uploadPAN.setOnClickListener(this);
         expiryMonth.setOnClickListener(this);
         expiryYear.setOnClickListener(this);
         /*DatePickerDialog datePickerDialog=new DatePickerDialog(this, listener, year, month, day);
@@ -77,7 +74,7 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
     }
 
     private void initialize() {
-        uploadPAN=(Button) findViewById(R.id.btnUploadPAN);
+
         expiryYear = (TextView) findViewById(R.id.tvExpiryYear);
         expiryMonth = (TextView) findViewById(R.id.tvExpiryMonth);
         fullName = (EditText)findViewById(R.id.etFullName);
@@ -85,7 +82,6 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
         panNumber = (EditText)findViewById(R.id.etPANNumber);
         address = (EditText)findViewById(R.id.etAddress);
         cardNumber = (EditText)findViewById(R.id.etCardNumber);
-        imageOfPANCard = (ImageView) findViewById(R.id.ivPANImage);
         cardNumber.addTextChangedListener(new GroupedInputFormatWatcher(cardNumber));
         ApplyInputFilters applyFilters = new ApplyInputFilters(getString(R.string.AddressCharacterFilter));
         address.setFilters(new InputFilter[]{applyFilters});
@@ -115,29 +111,7 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
     @Override
     public void onClick(View view) {
 
-        if (view == uploadPAN) {
-            Log.i("VendorRegistration", "onclick");
-            final CharSequence[] uploadPanOptions = {"Take a Picture", "Choose From Gallery"};
-            AlertDialog.Builder builder = new AlertDialog.Builder(GeneralPublicRegistration.this);
-
-            builder.setTitle("Choose Options");
-            builder.setItems(uploadPanOptions, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    if (uploadPanOptions[i].equals("Take a Picture")) {
-                        builderIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(builderIntent, CAPTURE_IMAGE_FROM_CAMERA);
-
-                    } else if (uploadPanOptions[i].equals("Choose From Gallery")) {
-                        builderIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(builderIntent, LOAD_IMAGE_FROM_GALLERY);
-                    }
-                }
-            });
-            builder.setInverseBackgroundForced(true);
-            builder.create();
-            builder.show();
-        } else if (view == expiryMonth) {
+        if (view == expiryMonth) {
             final CharSequence[] mnth = {"01(Jan)", "02(Feb)", "03(Mar)", "04(Apr)", "05(May)", "06(Jun)", "07(Jul)", "08(Aug)", "09(Sep)", "10(Oct)", "11(Nov)", "12(Dec)"};
             AlertDialog.Builder builder = new AlertDialog.Builder(GeneralPublicRegistration.this);
             builder.setTitle("Select Month");
@@ -164,33 +138,6 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
             builder.setInverseBackgroundForced(true);
             builder.create();
             builder.show();
-        }
-    }
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Bitmap bitmap;
-        Bitmap resizedBitmap;
-        if (requestCode == LOAD_IMAGE_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
-            Uri selectedImageFromUri = data.getData();
-            String pathOFImage = getRealPathFromURI(selectedImageFromUri);
-            File imgFile = new File(pathOFImage);
-            bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            resizedBitmap = Bitmap.createScaledBitmap(bitmap, 80, 45, false);
-            imageOfPANCard.setImageBitmap(resizedBitmap);
-        } else if (requestCode == CAPTURE_IMAGE_FROM_CAMERA && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            bitmap = (Bitmap) extras.get("data");
-            resizedBitmap = Bitmap.createScaledBitmap(bitmap, 80, 45, false);
-            imageOfPANCard.setImageBitmap(resizedBitmap);
-        }
-    }
-    private String getRealPathFromURI(Uri selectedImageFromUri) {
-        Cursor cursor = getContentResolver().query(selectedImageFromUri, null, null, null, null);
-        if (cursor == null) {
-            return selectedImageFromUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(idx);
         }
     }
 }
