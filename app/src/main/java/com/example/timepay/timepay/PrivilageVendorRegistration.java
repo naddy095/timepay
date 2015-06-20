@@ -33,6 +33,7 @@ public class PrivilageVendorRegistration extends ActionBarActivity implements Vi
     EditText companyName ,shopName ,accountNumber, ifscCode,panNo;
     ImageView imageOfPANCard;
     Intent builderIntent;
+    TextView paymentGatewayLink;
 
 
     @Override
@@ -56,6 +57,7 @@ public class PrivilageVendorRegistration extends ActionBarActivity implements Vi
         ifscCode =(EditText)findViewById(R.id.etPVRIFSCCode);
         panNo =(EditText)findViewById(R.id.etPANNumber);
         imageOfPANCard=(ImageView)findViewById(R.id.ivPANImage);
+        paymentGatewayLink=(TextView)findViewById(R.id.paymentGatewayLink);
 
     }
     private void setListener(){
@@ -63,6 +65,7 @@ public class PrivilageVendorRegistration extends ActionBarActivity implements Vi
         companyID.setOnClickListener(this);
         uploadPAN.setOnClickListener(this);
         continueBtn.setOnClickListener(this);
+        paymentGatewayLink.setOnClickListener(this);
     }
     @Override
     public void onClick(View view) {
@@ -110,6 +113,10 @@ public class PrivilageVendorRegistration extends ActionBarActivity implements Vi
             }else {
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
             }
+        }else if(view==paymentGatewayLink) {
+            Intent intent = new Intent(PrivilageVendorRegistration.this, Webview.class);
+            intent.putExtra("wvTerms", getString(R.string.wvIAree));
+            startActivity(intent);
         }
 
         }
