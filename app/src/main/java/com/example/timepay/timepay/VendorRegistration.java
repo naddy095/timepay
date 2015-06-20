@@ -115,7 +115,7 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             startActivity(intent);
         }
 
-        /*else if (view==expiryMonth) {
+        /*else if (view==expiryMonth)  {'
             final CharSequence[] mnth={"01(Jan)","02(Feb)","03(Mar)","04(Apr)","05(May)","06(Jun)","07(Jul)","08(Aug)","09(Sep)","10(Oct)","11(Nov)","12(Dec)"};
             AlertDialog.Builder builder = new AlertDialog.Builder(VendorRegistration.this);
             builder.setTitle("Select Month");
