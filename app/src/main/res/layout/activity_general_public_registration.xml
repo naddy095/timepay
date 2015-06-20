@@ -50,6 +50,7 @@
                     android:layout_marginTop="5dp"
                     android:hint="@string/CompleteAddress_Hint"
                     android:minEms="20"
+                    android:digits="@string/AddressCharacterFilter"
                     android:minLines="2" />
 
                 <EditText

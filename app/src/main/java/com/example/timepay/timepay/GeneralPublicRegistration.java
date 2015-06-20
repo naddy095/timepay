@@ -74,8 +74,8 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
         cardName=(EditText)findViewById(R.id.etCardFullName);
         continueBtn=(Button)findViewById(R.id.bContinue);
         cardNumber.addTextChangedListener(new GroupedInputFormatWatcher(cardNumber));
-        ApplyInputFilters applyFilters = new ApplyInputFilters(getString(R.string.AddressCharacterFilter));
-        address.setFilters(new InputFilter[]{applyFilters});
+        //ApplyInputFilters applyFilters = new ApplyInputFilters(getString(R.string.AddressCharacterFilter));
+        //address.setFilters(new InputFilter[]{applyFilters});
     }
 
 
