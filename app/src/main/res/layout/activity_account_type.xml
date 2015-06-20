@@ -51,7 +51,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="I Read and Accept Terms and Conditions"
+                    android:text="@string/IAgree_Hint"
                     android:id="@+id/tvIAgree"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="30dp"
@@ -72,18 +72,8 @@
             android:layout_gravity="center|bottom">
         <Button
             android:id="@+id/bContinue"
-            android:layout_width="368dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_weight="0"
-            android:background="@android:color/holo_blue_light"
             android:text="@string/signup_continue_btn"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:layout_gravity="center_horizontal|bottom"
-            android:textColorHighlight="#FFFFEE"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            style="@style/BtContinue"
            />
         </LinearLayout>
     </LinearLayout>

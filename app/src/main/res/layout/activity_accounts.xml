@@ -59,18 +59,8 @@
 
         <Button
             android:id="@+id/bContinue"
-            android:layout_width="368dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
             android:text="@string/signup_continue_btn"
-            android:textColor="#FFFFFF"
-            android:textAllCaps="false"
-            android:textColorHighlight="#FFFFEE"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_weight="0"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal|bottom" />
+            style="@style/BtContinue"/>
     </LinearLayout>
 
 </LinearLayout>
