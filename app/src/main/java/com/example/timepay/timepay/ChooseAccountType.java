@@ -75,7 +75,6 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
                         case 2:
                             i = new Intent(ChooseAccountType.this,PrivilageVendorRegistration.class);
                             startActivity(i);
-
                             // Toast.makeText(ChooseAccountType.this, "Privilege Vendor Registration", Toast.LENGTH_SHORT).show();
                             break;
 

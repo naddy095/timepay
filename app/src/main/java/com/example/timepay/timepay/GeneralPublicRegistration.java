@@ -23,7 +23,7 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
     private static final int CAPTURE_IMAGE_FROM_CAMERA = 0;
     private static final int LOAD_IMAGE_FROM_GALLERY = 1;
     EditText  fullName,cardName,panNumber,address,cardNumber;
-    Button searchIFSCCode , continueBtn ;
+    Button continueBtn ;
     TextView expiryMonth ,expiryYear;
     Intent builderIntent;
     @Override
@@ -137,12 +137,11 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
                     address.getText() + "", panNumber.getText() + "",
                     cardNumber.getText() + "", cardName.getText() + "",
                     expiryMonth.getText() + "", expiryYear.getText() + "");
-            if (message.equals("")){
-                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+            if (message.equals("Completed")){
+                Toast.makeText(getApplicationContext(),"Completed Successfully",Toast.LENGTH_SHORT).show();
             }else {
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
             }
-
         }
     }
 }

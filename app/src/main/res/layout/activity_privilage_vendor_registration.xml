@@ -118,46 +118,35 @@
                     android:ems="10"
                     android:hint="@string/pan_hint"
                     android:inputType="text" />
-
-                <!--Card Details 1-->
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:paddingLeft="3dp"
-                    android:text="@string/card_subheader"
-                    android:textAppearance="@android:style/TextAppearance.Medium"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/etCardNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
-                    android:ems="10"
-                    android:hint="@string/cardnumber_hint"
-                    android:inputType="number" />
-
-                <EditText
-                    android:id="@+id/etCardFullName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:hint="Name on card" />
-                <!--need to auto complete from full name field-->
-                <EditText
-                    android:id="@+id/etExpiryDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
-                    android:hint="Card Expiry" />
             </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnUploadPAN"
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:text="@string/pan_upload" />
+
+                <ImageView
+                    android:id="@+id/ivPANImage"
+                    android:layout_width="160dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/abc_ab_share_pack_mtrl_alpha" />
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

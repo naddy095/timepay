@@ -28,38 +28,33 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
 
     private static final int CAPTURE_IMAGE_FROM_CAMERA = 0;
     private static final int LOAD_IMAGE_FROM_GALLERY=1;
-    EditText expiryDate;
-    EditText panNo;
-    Button uploadPAN;
-    Button searchIFSCCode ;
-    TextView expiryMonth;
-    TextView expiryYear;
+
+    EditText companyName ,shopName ,accountNumber, ifscCode,panNo;
+    Button uploadPAN ,searchIFSCCode ,continueBtn;
+    TextView expiryMonth,expiryYear;
     ImageView imageOfPANCard;
     Intent builderIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendor_registration);
-
-
         initialize();
-        Log.i("VendorRegistration", "beforeListener");
         uploadPAN.setOnClickListener(this);
-       // expiryMonth.setOnClickListener(this);
-        //expiryYear.setOnClickListener(this);
         searchIFSCCode.setOnClickListener(this);
-        Log.i("VendorRegistration", "afterListener");
-
+        continueBtn.setOnClickListener(this);
     }
 
     private void initialize() {
-        //expiryDate = (EditText)findViewById(R.id.etExpiryDate);
-        //expiryYear=(TextView)findViewById(R.id.tvExpiryYear);
-        //expiryMonth=(TextView)findViewById(R.id.tvExpiryMonth);
+
         uploadPAN=(Button)findViewById(R.id.btnUploadPAN);
+        companyName=(EditText)findViewById(R.id.etRegisteredCompanyName);
+        shopName=(EditText)findViewById(R.id.etShopPublicBrandName);
+        accountNumber=(EditText)findViewById(R.id.etAccountNumber);
+        ifscCode=(EditText)findViewById(R.id.etIFSCCode);
         panNo=(EditText)findViewById(R.id.etPANNumber);
         imageOfPANCard=(ImageView)findViewById(R.id.ivPANImage);
         searchIFSCCode = (Button)findViewById(R.id.btnIFSCCode);
+        continueBtn=(Button)findViewById(R.id.bContinue);
 
     }
 
@@ -146,6 +141,16 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             Intent intent = new Intent(VendorRegistration.this, Webview.class);
             intent.putExtra("wvTerms", getString(R.string.IFSC));
             startActivity(intent);
+        }if (view == continueBtn){
+
+            Validator validator=new Validator();
+            String message= validator.validateVendorRegistration(companyName, shopName, accountNumber, ifscCode, panNo);
+
+            if (message.equals("Completed")){
+                Toast.makeText(getApplicationContext(),"Completed Successfully",Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+            }
         }
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
