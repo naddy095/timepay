@@ -155,7 +155,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
-                android:layout_toRightOf="@id/cbIAgree"
                 android:textSize="18dp"
                 android:textColor="#0000FF"/>
 

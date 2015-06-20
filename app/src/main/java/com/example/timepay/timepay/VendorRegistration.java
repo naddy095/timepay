@@ -31,9 +31,9 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
 
     EditText companyName ,shopName ,accountNumber, ifscCode,panNo;
     Button uploadPAN ,searchIFSCCode ,continueBtn;
-    TextView expiryMonth,expiryYear;
     ImageView imageOfPANCard;
     Intent builderIntent;
+    TextView paymentGatewayLink;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +42,7 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
         uploadPAN.setOnClickListener(this);
         searchIFSCCode.setOnClickListener(this);
         continueBtn.setOnClickListener(this);
+        paymentGatewayLink.setOnClickListener(this);
     }
 
     private void initialize() {
@@ -55,6 +56,7 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
         imageOfPANCard=(ImageView)findViewById(R.id.ivPANImage);
         searchIFSCCode = (Button)findViewById(R.id.btnIFSCCode);
         continueBtn=(Button)findViewById(R.id.bContinue);
+        paymentGatewayLink=(TextView)findViewById(R.id.paymentGatewayLink);
 
     }
 
@@ -106,7 +108,13 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             builder.setInverseBackgroundForced(true);
             builder.create();
             builder.show();
-        }else if (view==expiryMonth) {
+        }else if(view==paymentGatewayLink) {
+            Intent intent = new Intent(VendorRegistration.this, Webview.class);
+            intent.putExtra("wvTerms", getString(R.string.wvIAree));
+            startActivity(intent);
+        }
+
+        /*else if (view==expiryMonth) {
             final CharSequence[] mnth={"01(Jan)","02(Feb)","03(Mar)","04(Apr)","05(May)","06(Jun)","07(Jul)","08(Aug)","09(Sep)","10(Oct)","11(Nov)","12(Dec)"};
             AlertDialog.Builder builder = new AlertDialog.Builder(VendorRegistration.this);
             builder.setTitle("Select Month");
@@ -134,7 +142,7 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             builder.setInverseBackgroundForced(true);
             builder.create();
             builder.show();
-        }
+        }*/
 
         else if(view == searchIFSCCode)
         {
