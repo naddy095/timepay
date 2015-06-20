@@ -99,6 +99,10 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         spAccountType.setSelection(i);
+        if(cbIAgree.isChecked())
+        {
+            cbIAgree.toggle();
+        }
         position = i;
     }
 
