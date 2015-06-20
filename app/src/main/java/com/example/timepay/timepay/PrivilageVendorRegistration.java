@@ -21,7 +21,7 @@ import android.widget.Toast;
 import java.io.File;
 
 /**
- * Created by Sahil on 20-06-2015.
+ * Created by Sahil on 20-06-2015/.
  */
 public class PrivilageVendorRegistration extends ActionBarActivity implements View.OnClickListener {
 
