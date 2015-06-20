@@ -33,4 +33,5 @@
     <string name="wvIAree">https://www.google.co.in</string>
     <string name="IFSC">https://www.google.co.in</string>
     <string name="CompanyID">https://www.google.co.in</string>
+    <string name="IAgree_Hint">You must agree with the terms and conditions</string>
 </resources>
