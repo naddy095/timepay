@@ -32,8 +32,8 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
     EditText panNo;
     Button uploadPAN;
     Button searchIFSCCode ;
-    //TextView expiryMonth;
-    //TextView expiryYear;
+    TextView expiryMonth;
+    TextView expiryYear;
     ImageView imageOfPANCard;
     Intent builderIntent;
     @Override
@@ -45,7 +45,7 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
         initialize();
         Log.i("VendorRegistration", "beforeListener");
         uploadPAN.setOnClickListener(this);
-        //expiryMonth.setOnClickListener(this);
+       // expiryMonth.setOnClickListener(this);
         //expiryYear.setOnClickListener(this);
         searchIFSCCode.setOnClickListener(this);
         Log.i("VendorRegistration", "afterListener");
@@ -53,7 +53,7 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
     }
 
     private void initialize() {
-        expiryDate = (EditText)findViewById(R.id.etExpiryDate);
+        //expiryDate = (EditText)findViewById(R.id.etExpiryDate);
         //expiryYear=(TextView)findViewById(R.id.tvExpiryYear);
         //expiryMonth=(TextView)findViewById(R.id.tvExpiryMonth);
         uploadPAN=(Button)findViewById(R.id.btnUploadPAN);
@@ -111,7 +111,7 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             builder.setInverseBackgroundForced(true);
             builder.create();
             builder.show();
-        }/*else if (view==expiryMonth) {
+        }else if (view==expiryMonth) {
             final CharSequence[] mnth={"01(Jan)","02(Feb)","03(Mar)","04(Apr)","05(May)","06(Jun)","07(Jul)","08(Aug)","09(Sep)","10(Oct)","11(Nov)","12(Dec)"};
             AlertDialog.Builder builder = new AlertDialog.Builder(VendorRegistration.this);
             builder.setTitle("Select Month");
@@ -140,7 +140,7 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             builder.create();
             builder.show();
         }
-*/
+
         if(view == searchIFSCCode)
         {
             Intent intent = new Intent(VendorRegistration.this, Webview.class);
@@ -148,7 +148,23 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             startActivity(intent);
         }
     }
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Bitmap bitmap;
+        Bitmap resizedBitmap;
+        if (requestCode == LOAD_IMAGE_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
+            Uri selectedImageFromUri = data.getData();
+            String pathOFImage = getRealPathFromURI(selectedImageFromUri);
+            File imgFile = new File(pathOFImage);
+            bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            resizedBitmap = Bitmap.createScaledBitmap(bitmap, 80, 45, false);
+            imageOfPANCard.setImageBitmap(resizedBitmap);
+        } else if (requestCode == CAPTURE_IMAGE_FROM_CAMERA && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            bitmap = (Bitmap) extras.get("data");
+            resizedBitmap = Bitmap.createScaledBitmap(bitmap, 80, 45, false);
+            imageOfPANCard.setImageBitmap(resizedBitmap);
+        }
+    }
 
     private String getRealPathFromURI(Uri selectedImageFromUri) {
         Cursor cursor = getContentResolver().query(selectedImageFromUri, null, null, null, null);

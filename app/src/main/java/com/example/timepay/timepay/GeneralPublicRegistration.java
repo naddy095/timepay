@@ -117,7 +117,7 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
             builder.setTitle("Select Month");
             builder.setItems(mnth, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(), "You have selected  " + mnth[which], Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "You have selected  " + mnth[which], Toast.LENGTH_LONG).show();
                     expiryMonth.setText(mnth[which]);
                 }
             });
@@ -131,7 +131,7 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
             builder.setTitle("Select Year");
             builder.setItems(yr, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(), "You have selected  " + yr[which], Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "You have selected  " + yr[which], Toast.LENGTH_LONG).show();
                     expiryYear.setText(yr[which]);
                 }
             });
