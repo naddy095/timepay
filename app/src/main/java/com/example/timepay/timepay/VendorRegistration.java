@@ -110,7 +110,8 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             builder.show();
         }else if(view==paymentGatewayLink) {
             Intent intent = new Intent(VendorRegistration.this, Webview.class);
-            intent.putExtra("wvTerms", getString(R.string.wvIAree));
+            intent.putExtra("URL", getString(R.string.wvIAree));
+            intent.putExtra("Text",getString(R.string.Text_view_IFSC));
             startActivity(intent);
         }
 

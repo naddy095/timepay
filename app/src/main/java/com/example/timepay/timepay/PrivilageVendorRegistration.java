@@ -117,7 +117,8 @@ public class PrivilageVendorRegistration extends ActionBarActivity implements Vi
             }
         }else if(view==paymentGatewayLink) {
             Intent intent = new Intent(PrivilageVendorRegistration.this, Webview.class);
-            intent.putExtra("wvTerms", getString(R.string.wvIAree));
+            intent.putExtra("URL", getString(R.string.wvIAree));
+            intent.putExtra("Text",getString(R.string.Text_view_IFSC));
             startActivity(intent);
         }
 
