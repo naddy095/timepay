@@ -127,7 +127,7 @@
 
                 </LinearLayout>
                 <!--Card Details 1-->
-                <TextView
+               <!-- <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -135,29 +135,29 @@
                     android:text="@string/card_subheader"
                     android:textAppearance="@android:style/TextAppearance.Medium"
                     android:textColor="@android:color/black"
-                    android:textStyle="bold" />
+                    android:textStyle="bold" />-->
 
-                <EditText
+               <!-- <EditText
                     android:id="@+id/etCardNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
-                    android:maxLength="19"
+                    android:maxLength="23"
                     android:ems="10"
                     android:hint="@string/cardnumber_hint"
-                    android:inputType="number" />
+                    android:inputType="number" />-->
 
-                <EditText
+                <!--<EditText
                     android:id="@+id/etCardFullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:hint="Name on card" />
+                    android:hint="Name on card" />-->
                 <!--need to auto complete from full name field-->
-                <LinearLayout
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:orientation="horizontal">
@@ -167,13 +167,15 @@
                         android:layout_width="100dp"
                         android:layout_height="40dp"
                         android:gravity="center"
+                        android:textSize="18sp"
                         android:text="@string/card_expiry_date" />
 
                     <TextView
                         android:id="@+id/tvExpiryMonth"
-                        android:layout_width="60dp"
+                        android:layout_width="80dp"
                         android:layout_height="40dp"
                         android:gravity="center"
+                        android:textSize="18sp"
                         android:layout_marginLeft="40dp"
                         android:text="@string/expiry_month" />
 
@@ -182,9 +184,10 @@
                         android:layout_width="60dp"
                         android:layout_height="40dp"
                         android:gravity="center"
+                        android:textSize="18sp"
                         android:layout_marginLeft="5dp"
                         android:text="@string/expiry_year" />
-                </LinearLayout>
+                </LinearLayout>-->
             </LinearLayout>
 
             <LinearLayout

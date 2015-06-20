@@ -50,32 +50,19 @@
                     android:layout_marginTop="5dp"
                     android:hint="@string/CompleteAddress_Hint"
                     android:minEms="20"
+                    android:digits="@string/AddressCharacterFilter"
                     android:minLines="2" />
-                <LinearLayout
+
+                <EditText
+                    android:id="@+id/etPANNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:hint="@string/pan_hint"
+                    android:inputType="text" />
 
-                    <Button
-                        android:id="@+id/btnUploadPAN"
-                        android:layout_width="100dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="5dp"
-                        android:ems="10"
-                        android:text="@string/pan_upload" />
-
-                    <ImageView
-                        android:id="@+id/ivPANImage"
-                        android:layout_width="160dp"
-                        android:layout_height="90dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="15dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/abc_ab_share_pack_mtrl_alpha" />
-
-                </LinearLayout>
                 <!--Card Details 1-->
                 <TextView
                     android:layout_width="match_parent"
@@ -94,9 +81,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
+                    android:maxLength="23"
                     android:ems="10"
                     android:hint="@string/cardnumber_hint"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:digits="09876 54321"/>
 
                 <EditText
@@ -110,7 +98,7 @@
                     android:inputType="textPersonName"
                     />
                 <!--need to auto complete from full name field-->
-                <LinearLayout
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:orientation="horizontal">
@@ -135,6 +123,43 @@
                         android:layout_width="60dp"
                         android:layout_height="40dp"
                         android:gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/expiry_year" />
+                </LinearLayout>
+            -->
+
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvExpiryCard"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="@string/card_expiry_date" />
+
+                    <TextView
+                        android:id="@+id/tvExpiryMonth"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="40dp"
+                        android:text="@string/expiry_month" />
+
+                    <TextView
+                        android:id="@+id/tvExpiryYear"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:textSize="18sp"
                         android:layout_marginLeft="5dp"
                         android:text="@string/expiry_year" />
                 </LinearLayout>

@@ -45,17 +45,17 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
         initialize();
         Log.i("VendorRegistration", "beforeListener");
         uploadPAN.setOnClickListener(this);
-        expiryMonth.setOnClickListener(this);
-        expiryYear.setOnClickListener(this);
+       // expiryMonth.setOnClickListener(this);
+        //expiryYear.setOnClickListener(this);
         searchIFSCCode.setOnClickListener(this);
         Log.i("VendorRegistration", "afterListener");
 
     }
 
     private void initialize() {
-        expiryDate = (EditText)findViewById(R.id.etExpiryDate);
-        expiryYear=(TextView)findViewById(R.id.tvExpiryYear);
-        expiryMonth=(TextView)findViewById(R.id.tvExpiryMonth);
+        //expiryDate = (EditText)findViewById(R.id.etExpiryDate);
+        //expiryYear=(TextView)findViewById(R.id.tvExpiryYear);
+        //expiryMonth=(TextView)findViewById(R.id.tvExpiryMonth);
         uploadPAN=(Button)findViewById(R.id.btnUploadPAN);
         panNo=(EditText)findViewById(R.id.etPANNumber);
         imageOfPANCard=(ImageView)findViewById(R.id.ivPANImage);
@@ -117,7 +117,8 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             builder.setTitle("Select Month");
             builder.setItems(mnth, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(), "You have selected  " + mnth[which], Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getApplicationContext(), "You have selected  " + mnth[which], Toast.LENGTH_LONG).show();
+                    expiryMonth.setText(mnth[which]);
 
                 }
             });
@@ -131,7 +132,8 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             builder.setTitle("Select Year");
             builder.setItems(yr, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(), "You have selected  " + yr[which], Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getApplicationContext(), "You have selected  " + yr[which], Toast.LENGTH_LONG).show();
+                    expiryYear.setText(yr[which]);
                 }
             });
             builder.setInverseBackgroundForced(true);
@@ -146,23 +148,22 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             startActivity(intent);
         }
     }
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Bitmap bitmap ;
+        Bitmap bitmap;
         Bitmap resizedBitmap;
-            if (requestCode==LOAD_IMAGE_FROM_GALLERY && resultCode==RESULT_OK && data !=null){
-                Uri selectedImageFromUri=data.getData();
-                String pathOFImage=getRealPathFromURI(selectedImageFromUri);
-                File imgFile=new File(pathOFImage);
-                bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                resizedBitmap = Bitmap.createScaledBitmap(bitmap, 80, 45, false);
-                imageOfPANCard.setImageBitmap(resizedBitmap);
-            }else if (requestCode==CAPTURE_IMAGE_FROM_CAMERA && resultCode ==RESULT_OK){
-                Bundle extras = data.getExtras();
-                bitmap = (Bitmap) extras.get("data");
-                resizedBitmap = Bitmap.createScaledBitmap(bitmap, 80, 45, false);
-                imageOfPANCard.setImageBitmap(resizedBitmap);
-                }
+        if (requestCode == LOAD_IMAGE_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
+            Uri selectedImageFromUri = data.getData();
+            String pathOFImage = getRealPathFromURI(selectedImageFromUri);
+            File imgFile = new File(pathOFImage);
+            bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            resizedBitmap = Bitmap.createScaledBitmap(bitmap, 80, 45, false);
+            imageOfPANCard.setImageBitmap(resizedBitmap);
+        } else if (requestCode == CAPTURE_IMAGE_FROM_CAMERA && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            bitmap = (Bitmap) extras.get("data");
+            resizedBitmap = Bitmap.createScaledBitmap(bitmap, 80, 45, false);
+            imageOfPANCard.setImageBitmap(resizedBitmap);
+        }
     }
 
     private String getRealPathFromURI(Uri selectedImageFromUri) {

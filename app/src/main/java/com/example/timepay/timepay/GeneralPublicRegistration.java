@@ -1,14 +1,8 @@
 package com.example.timepay.timepay;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -17,17 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.Utils.ApplyInputFilters;
 import com.example.Utils.GroupedInputFormatWatcher;
-
-import java.io.File;
 
 
 public class GeneralPublicRegistration extends ActionBarActivity implements View.OnClickListener{
@@ -35,10 +23,8 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
     private static final int CAPTURE_IMAGE_FROM_CAMERA = 0;
     private static final int LOAD_IMAGE_FROM_GALLERY = 1;
     EditText  fullName,cardName,panNumber,address,cardNumber;
-    Button searchIFSCCode ;
+    Button searchIFSCCode , continueBtn ;
     TextView expiryMonth ,expiryYear;
-    Button uploadPAN;
-    ImageView imageOfPANCard;
     Intent builderIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +32,10 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
         setContentView(R.layout.activity_general_public_registration);
 
         initialize();
-        uploadPAN.setOnClickListener(this);
         expiryMonth.setOnClickListener(this);
         expiryYear.setOnClickListener(this);
+        continueBtn.setOnClickListener(this);
+
         /*DatePickerDialog datePickerDialog=new DatePickerDialog(this, listener, year, month, day);
         DatePicker datepicker=datePickerDialog.getDatePicker();
         //datep.removeViewAt(0);
@@ -77,7 +64,6 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
     }
 
     private void initialize() {
-        uploadPAN=(Button) findViewById(R.id.btnUploadPAN);
         expiryYear = (TextView) findViewById(R.id.tvExpiryYear);
         expiryMonth = (TextView) findViewById(R.id.tvExpiryMonth);
         fullName = (EditText)findViewById(R.id.etFullName);
@@ -85,10 +71,11 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
         panNumber = (EditText)findViewById(R.id.etPANNumber);
         address = (EditText)findViewById(R.id.etAddress);
         cardNumber = (EditText)findViewById(R.id.etCardNumber);
-        imageOfPANCard = (ImageView) findViewById(R.id.ivPANImage);
+        cardName=(EditText)findViewById(R.id.etCardFullName);
+        continueBtn=(Button)findViewById(R.id.bContinue);
         cardNumber.addTextChangedListener(new GroupedInputFormatWatcher(cardNumber));
-        ApplyInputFilters applyFilters = new ApplyInputFilters(getString(R.string.AddressCharacterFilter));
-        address.setFilters(new InputFilter[]{applyFilters});
+        //ApplyInputFilters applyFilters = new ApplyInputFilters(getString(R.string.AddressCharacterFilter));
+        //address.setFilters(new InputFilter[]{applyFilters});
     }
 
 
@@ -115,35 +102,13 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
     @Override
     public void onClick(View view) {
 
-        if (view == uploadPAN) {
-            Log.i("VendorRegistration", "onclick");
-            final CharSequence[] uploadPanOptions = {"Take a Picture", "Choose From Gallery"};
-            AlertDialog.Builder builder = new AlertDialog.Builder(GeneralPublicRegistration.this);
-
-            builder.setTitle("Choose Options");
-            builder.setItems(uploadPanOptions, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    if (uploadPanOptions[i].equals("Take a Picture")) {
-                        builderIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(builderIntent, CAPTURE_IMAGE_FROM_CAMERA);
-
-                    } else if (uploadPanOptions[i].equals("Choose From Gallery")) {
-                        builderIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(builderIntent, LOAD_IMAGE_FROM_GALLERY);
-                    }
-                }
-            });
-            builder.setInverseBackgroundForced(true);
-            builder.create();
-            builder.show();
-        } else if (view == expiryMonth) {
+        if (view == expiryMonth) {
             final CharSequence[] mnth = {"01(Jan)", "02(Feb)", "03(Mar)", "04(Apr)", "05(May)", "06(Jun)", "07(Jul)", "08(Aug)", "09(Sep)", "10(Oct)", "11(Nov)", "12(Dec)"};
             AlertDialog.Builder builder = new AlertDialog.Builder(GeneralPublicRegistration.this);
             builder.setTitle("Select Month");
             builder.setItems(mnth, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(), "You have selected  " + mnth[which], Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "You have selected  " + mnth[which], Toast.LENGTH_LONG).show();
                     expiryMonth.setText(mnth[which]);
                 }
             });
@@ -157,7 +122,7 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
             builder.setTitle("Select Year");
             builder.setItems(yr, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(), "You have selected  " + yr[which], Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "You have selected  " + yr[which], Toast.LENGTH_LONG).show();
                     expiryYear.setText(yr[which]);
                 }
             });
@@ -165,32 +130,19 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
             builder.create();
             builder.show();
         }
-    }
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Bitmap bitmap;
-        Bitmap resizedBitmap;
-        if (requestCode == LOAD_IMAGE_FROM_GALLERY && resultCode == RESULT_OK && data != null) {
-            Uri selectedImageFromUri = data.getData();
-            String pathOFImage = getRealPathFromURI(selectedImageFromUri);
-            File imgFile = new File(pathOFImage);
-            bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            resizedBitmap = Bitmap.createScaledBitmap(bitmap, 80, 45, false);
-            imageOfPANCard.setImageBitmap(resizedBitmap);
-        } else if (requestCode == CAPTURE_IMAGE_FROM_CAMERA && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            bitmap = (Bitmap) extras.get("data");
-            resizedBitmap = Bitmap.createScaledBitmap(bitmap, 80, 45, false);
-            imageOfPANCard.setImageBitmap(resizedBitmap);
-        }
-    }
-    private String getRealPathFromURI(Uri selectedImageFromUri) {
-        Cursor cursor = getContentResolver().query(selectedImageFromUri, null, null, null, null);
-        if (cursor == null) {
-            return selectedImageFromUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(idx);
+        if (view == continueBtn) {
+            Log.i("GPR",expiryYear.getText()+""+expiryMonth.getText());
+            Validator validator=new Validator();
+            String message=validator.validateGPR(fullName.getText() + "",
+                    address.getText() + "", panNumber.getText() + "",
+                    cardNumber.getText() + "", cardName.getText() + "",
+                    expiryMonth.getText() + "", expiryYear.getText() + "");
+            if (message.equals("")){
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 }
