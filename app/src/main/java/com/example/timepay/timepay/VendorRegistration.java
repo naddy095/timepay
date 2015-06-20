@@ -121,7 +121,7 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             builder.create();
             builder.show();
         }
-        if (view==expiryYear) {
+        else if (view==expiryYear) {
             final CharSequence[] yr={"2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026"};
             AlertDialog.Builder builder = new AlertDialog.Builder(VendorRegistration.this);
             builder.setTitle("Select Year");
@@ -136,15 +136,17 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
             builder.show();
         }
 
-        if(view == searchIFSCCode)
+        else if(view == searchIFSCCode)
         {
             Intent intent = new Intent(VendorRegistration.this, Webview.class);
             intent.putExtra("wvTerms", getString(R.string.IFSC));
             startActivity(intent);
-        }if (view == continueBtn){
+        }else if (view == continueBtn){
 
             Validator validator=new Validator();
-            String message= validator.validateVendorRegistration(companyName, shopName, accountNumber, ifscCode, panNo);
+            String message= validator.validateVendorRegistration(companyName.getText()+"",
+                    shopName.getText()+"", accountNumber.getText()+"",
+                    ifscCode.getText()+"", panNo.getText()+"");
 
             if (message.equals("Completed")){
                 Toast.makeText(getApplicationContext(),"Completed Successfully",Toast.LENGTH_SHORT).show();

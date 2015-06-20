@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -28,10 +29,11 @@ public class PrivilageVendorRegistration extends ActionBarActivity implements Vi
     private static final int CAPTURE_IMAGE_FROM_CAMERA = 0;
     private static final int LOAD_IMAGE_FROM_GALLERY=1;
 
-    Button uploadPAN,IFSC,companyID;
+    Button uploadPAN,IFSC,companyID,continueBtn;
     EditText companyName ,shopName ,accountNumber, ifscCode,panNo;
     ImageView imageOfPANCard;
     Intent builderIntent;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -39,38 +41,40 @@ public class PrivilageVendorRegistration extends ActionBarActivity implements Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_privilage_vendor_registration);
         initialize();
+        setListener();
 
-        IFSC.setOnClickListener(this);
-        companyID.setOnClickListener(this);
-        uploadPAN.setOnClickListener(this);
     }
     private void initialize()
     {
        IFSC = (Button)findViewById(R.id.btnPVRIFSCCode);
        companyID = (Button)findViewById(R.id.btnPVRCompanyID);
         uploadPAN=(Button)findViewById(R.id.btnUploadPAN);
-        companyName =(EditText)findViewById(R.id.etRegisteredCompanyName);
+        continueBtn=(Button)findViewById(R.id.bContinue);
+        companyName =(EditText)findViewById(R.id.etRegisteredCompanyID);
         shopName =(EditText)findViewById(R.id.etShopPublicBrandName);
         accountNumber =(EditText)findViewById(R.id.etAccountNumber);
-        ifscCode =(EditText)findViewById(R.id.etIFSCCode);
+        ifscCode =(EditText)findViewById(R.id.etPVRIFSCCode);
         panNo =(EditText)findViewById(R.id.etPANNumber);
         imageOfPANCard=(ImageView)findViewById(R.id.ivPANImage);
-    }
 
+    }
+    private void setListener(){
+        IFSC.setOnClickListener(this);
+        companyID.setOnClickListener(this);
+        uploadPAN.setOnClickListener(this);
+        continueBtn.setOnClickListener(this);
+    }
     @Override
     public void onClick(View view) {
-        if(view==IFSC)
-        {
+        if(view==IFSC) {
             Intent i = new Intent(PrivilageVendorRegistration.this,Webview.class);
             i.putExtra("wvTerms", getString(R.string.IFSC));
             startActivity(i);
-        }
-        if(view==companyID)
-        {
+        }else if(view==companyID){
             Intent i = new Intent(PrivilageVendorRegistration.this,Webview.class);
             i.putExtra("wvTerms", getString(R.string.CompanyID));
             startActivity(i);
-        }if(view ==uploadPAN){
+        }else if(view ==uploadPAN){
             Log.i("VendorRegistration", "onclick");
             final CharSequence[] uploadPanOptions={"Take a Picture","Choose From Gallery"};
             AlertDialog.Builder builder=new AlertDialog.Builder(PrivilageVendorRegistration.this);
@@ -92,8 +96,24 @@ public class PrivilageVendorRegistration extends ActionBarActivity implements Vi
             builder.setInverseBackgroundForced(true);
             builder.create();
             builder.show();
+        }else if(view==continueBtn){
+
+            Validator validator=new Validator();
+            String message= validator.validatePrivilageVendorRegistration(companyName.getText() + "",
+                    shopName.getText()+"",
+                    accountNumber.getText()+"",
+                    ifscCode.getText()+"",
+                    panNo.getText()+"");
+
+            if (message.equals("Completed")){
+                Toast.makeText(getApplicationContext(), "Completed Successfully", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+            }
         }
-    }
+
+        }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Bitmap bitmap;
         Bitmap resizedBitmap;

@@ -40,22 +40,42 @@ public class Validator {
         return message;
     }
 
-    public String validateVendorRegistration(EditText companyName,
-                                             EditText shopName,
-                                             EditText accountNumber,
-                                             EditText ifscCode,
-                                             EditText panNo) {
+    public String validateVendorRegistration(String companyName,
+                                             String shopName,
+                                             String accountNumber,
+                                             String ifscCode,
+                                             String panNo) {
         String message="Completed";
         if(companyName.length() == 0) {
-            message = "Full Name cannot be empty";
+            message = "Company Name cannot be empty";
         } else if (shopName.length() == 0) {
-            message = "Address cannot be empty";
+            message = "Shop name cannot be empty";
         } else if (accountNumber.length() == 0) {
-            message = "Pan Number cannot be empty";
+            message = "Account Number cannot be empty";
         } else if (ifscCode.length() == 0) {
-            message = "Card Number cannot be empty";
+            message = "IFSC Codecannot be empty";
         } else if (panNo.length() == 0) {
-            message = "Name on Card cannot be empty";
+            message = "Pan No cannot be empty";
+        }
+        return  message;
+    }
+
+    public String validatePrivilageVendorRegistration(String companyName,
+                                                      String shopName,
+                                                      String accountNumber,
+                                                      String ifscCode,
+                                                      String panNo) {
+        String message="Completed";
+        if(companyName.length() == 0) {
+            message = "Company Name cannot be empty";
+        } else if (shopName.length() == 0) {
+            message = "Shop name cannot be empty";
+        } else if (accountNumber.length() == 0) {
+            message = "Account Number cannot be empty";
+        } else if (ifscCode.length() == 0) {
+            message = "IFSC Codecannot be empty";
+        } else if (panNo.length() == 0) {
+            message = "Pan No cannot be empty";
         }
         return  message;
     }
