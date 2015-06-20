@@ -35,12 +35,34 @@
             android:layout_gravity="center_horizontal"
             android:spinnerMode="dropdown" />
 
-            <CheckBox
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="You must agree with the terms and conditions"
-                android:id="@+id/cbIAgree" />
+                android:layout_gravity="center_horizontal">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    
+                    android:id="@+id/cbIAgree"
+                    android:checked="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="I Read and Accept Terms and Conditions"
+                    android:id="@+id/tvIAgree"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_toRightOf="@id/cbIAgree"
+                    android:textSize="18dp"
+                    android:textColor="#0000FF"
+                    />
+
+
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

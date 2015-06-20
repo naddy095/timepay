@@ -3,7 +3,6 @@ package com.example.timepay.timepay;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,8 +33,8 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
         initializeView();
 
         //String checkBoxText = "you must agree with the <a href='http://www.google.com' > Terms and Conditions.</a>";
-        String checkBoxText = "you must agree with the Terms and Conditions.";
-        tvIAgree.setText(Html.fromHtml(checkBoxText));
+        //String checkBoxText = "you must agree with the Terms and Conditions.";
+       // tvIAgree.setText(Html.fromHtml(checkBoxText));
         tvIAgree.setClickable(true);
         tvIAgree.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +93,7 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
         spAccountType = (Spinner) findViewById(R.id.spAccountType);
         wvIAccpet = (WebView)findViewById(R.id.webview);
 
-        tvIAgree= (CheckBox)findViewById(R.id.cbIAgree);
+        tvIAgree= (TextView)findViewById(R.id.tvIAgree);
     }
 
     @Override
