@@ -1,14 +1,8 @@
 package com.example.timepay.timepay;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -17,17 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.Utils.ApplyInputFilters;
 import com.example.Utils.GroupedInputFormatWatcher;
-
-import java.io.File;
 
 
 public class GeneralPublicRegistration extends ActionBarActivity implements View.OnClickListener{
@@ -35,7 +23,7 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
     private static final int CAPTURE_IMAGE_FROM_CAMERA = 0;
     private static final int LOAD_IMAGE_FROM_GALLERY = 1;
     EditText  fullName,cardName,panNumber,address,cardNumber;
-    Button searchIFSCCode ;
+    Button searchIFSCCode , continueBtn ;
     TextView expiryMonth ,expiryYear;
     Intent builderIntent;
     @Override
@@ -46,6 +34,8 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
         initialize();
         expiryMonth.setOnClickListener(this);
         expiryYear.setOnClickListener(this);
+        continueBtn.setOnClickListener(this);
+
         /*DatePickerDialog datePickerDialog=new DatePickerDialog(this, listener, year, month, day);
         DatePicker datepicker=datePickerDialog.getDatePicker();
         //datep.removeViewAt(0);
@@ -74,7 +64,6 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
     }
 
     private void initialize() {
-
         expiryYear = (TextView) findViewById(R.id.tvExpiryYear);
         expiryMonth = (TextView) findViewById(R.id.tvExpiryMonth);
         fullName = (EditText)findViewById(R.id.etFullName);
@@ -82,6 +71,8 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
         panNumber = (EditText)findViewById(R.id.etPANNumber);
         address = (EditText)findViewById(R.id.etAddress);
         cardNumber = (EditText)findViewById(R.id.etCardNumber);
+        cardName=(EditText)findViewById(R.id.etCardFullName);
+        continueBtn=(Button)findViewById(R.id.bContinue);
         cardNumber.addTextChangedListener(new GroupedInputFormatWatcher(cardNumber));
         ApplyInputFilters applyFilters = new ApplyInputFilters(getString(R.string.AddressCharacterFilter));
         address.setFilters(new InputFilter[]{applyFilters});
@@ -138,6 +129,20 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
             builder.setInverseBackgroundForced(true);
             builder.create();
             builder.show();
+        }
+        if (view == continueBtn) {
+            Log.i("GPR",expiryYear.getText()+""+expiryMonth.getText());
+            Validator validator=new Validator();
+            String message=validator.validateGPR(fullName.getText() + "",
+                    address.getText() + "", panNumber.getText() + "",
+                    cardNumber.getText() + "", cardName.getText() + "",
+                    expiryMonth.getText() + "", expiryYear.getText() + "");
+            if (message.equals("")){
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 }
