@@ -40,7 +40,8 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ChooseAccountType.this, Webview.class);
-                intent.putExtra("wvTerms", getString(R.string.wvIAree));
+                intent.putExtra("URL", getString(R.string.wvIAree));
+                intent.putExtra("Text",getString(R.string.Text_view_IAgree));
                 startActivity(intent);
             }
         });

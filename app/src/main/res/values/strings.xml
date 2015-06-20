@@ -35,6 +35,8 @@
     <string name="CompanyID">https://www.google.co.in</string>
     <string name="IAgree_Hint">You must agree with the terms and conditions</string>
     <string name="payment_gateway_link">Payment Gateway Link</string>
-    <string name="test">Testk</string>
-    <string name="test1">Test123</string>
+    <string name="Text_view_IAgree">Terms and Conditions</string>
+    <string name="Text_view_CompanyID">Company ID</string>
+    <string name="Text_view_IFSC">IFSC CODE</string>
+    
 </resources>

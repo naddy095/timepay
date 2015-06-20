@@ -70,13 +70,15 @@ public class PrivilageVendorRegistration extends ActionBarActivity implements Vi
     @Override
     public void onClick(View view) {
         if(view==IFSC) {
-            Intent i = new Intent(PrivilageVendorRegistration.this,Webview.class);
-            i.putExtra("wvTerms", getString(R.string.IFSC));
-            startActivity(i);
+            Intent intent = new Intent(PrivilageVendorRegistration.this,Webview.class);
+            intent.putExtra("URL", getString(R.string.IFSC));
+            intent.putExtra("Text",getString(R.string.Text_view_IFSC));
+            startActivity(intent);
         }else if(view==companyID){
-            Intent i = new Intent(PrivilageVendorRegistration.this,Webview.class);
-            i.putExtra("wvTerms", getString(R.string.CompanyID));
-            startActivity(i);
+            Intent intent = new Intent(PrivilageVendorRegistration.this,Webview.class);
+            intent.putExtra("URL", getString(R.string.CompanyID));
+            intent.putExtra("Text",getString(R.string.Text_view_CompanyID));
+            startActivity(intent);
         }else if(view ==uploadPAN){
             Log.i("VendorRegistration", "onclick");
             final CharSequence[] uploadPanOptions={"Take a Picture","Choose From Gallery"};

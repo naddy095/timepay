@@ -147,7 +147,8 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
         else if(view == searchIFSCCode)
         {
             Intent intent = new Intent(VendorRegistration.this, Webview.class);
-            intent.putExtra("wvTerms", getString(R.string.IFSC));
+            intent.putExtra("URL", getString(R.string.IFSC));
+            intent.putExtra("Text",getString(R.string.Text_view_IFSC));
             startActivity(intent);
         }else if (view == continueBtn){
 
