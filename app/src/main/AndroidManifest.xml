@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,31 +25,37 @@
         </activity>
         <activity
             android:name=".HomePage"
-            android:label="HomePage">
+            android:label="HomePage"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Webview"
-            android:label="WebView">
+            android:label="WebView"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity android:name=".PrivilageVendorRegistration"
-            android:label="PrivilageVendorRegistration"></activity>
+            android:label="PrivilageVendorRegistration"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name=".Accounts"
-            android:label="@string/title_activity_accounts">
+            android:label="@string/title_activity_accounts"
+            android:screenOrientation="portrait">
     </activity>
         <activity
             android:name=".ChooseAccountType"
-            android:label="@string/title_activity_choose_account_type" >
+            android:label="@string/title_activity_choose_account_type" android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".GeneralPublicRegistration"
-            android:label="@string/title_activity_general_public_registration" >
+            android:label="@string/title_activity_general_public_registration"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".VendorRegistration"
-            android:label="@string/title_activity_vender_registration" >
+            android:label="@string/title_activity_vender_registration"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
