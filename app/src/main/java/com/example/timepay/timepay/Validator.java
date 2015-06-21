@@ -1,17 +1,28 @@
 package com.example.timepay.timepay;
 
-import android.widget.EditText;
-
 public class Validator {
+
+    String emailRegex;
+    Boolean email;
 
 
     public String validateAccountDetatis(String emailAddress, String phoneNumber) {
 
         String message = "Completed";
-        if (emailAddress.length() == 0) {
-            message = "Email Address cannot be empty";
-        } else if (phoneNumber.length() == 0) {
-            message = "Phone Number cannot be empty";
+        email = emailValidate(emailAddress);
+
+        if (emailAddress.isEmpty() || email==false) {
+            message = "Email Address is not valid";
+        } else {
+            if (phoneNumber.isEmpty()) {
+                message = "Phone Number cannot be empty";
+
+            }
+            else if(phoneNumber.length() != 10)
+            {
+                message="Phone number should be 10 digit";
+            }
+
         }
         return message;
     }
@@ -22,19 +33,19 @@ public class Validator {
                               String expiryMonth, String expiryYear) {
 
         String message = "Completed";
-        if (fullName.length() == 0) {
+        if (fullName.isEmpty()) {
             message = "Full Name cannot be empty";
-        } else if (address.length() == 0) {
+        } else if (address.isEmpty()) {
             message = "Address cannot be empty";
-        } else if (panNumber.length() == 0) {
+        } else if (panNumber.isEmpty()) {
             message = "Pan Number cannot be empty";
-        } else if (cardNumber.length() == 0) {
+        } else if (cardNumber.isEmpty()) {
             message = "Card Number cannot be empty";
-        } else if (cardName.length() == 0) {
+        } else if (cardName.isEmpty()) {
             message = "Name on Card cannot be empty";
-        } else if ((expiryMonth.length() == 0) || (expiryMonth.equals("Month"))) {
+        } else if ((expiryMonth.isEmpty()) || (expiryMonth.equals("Month"))) {
             message = "Expiry Month cannot be empty";
-        } else if ((expiryYear.length() == 0) || (expiryYear.equals("Year"))) {
+        } else if ((expiryYear.isEmpty()) || (expiryYear.equals("Year"))) {
             message = "Expiry Year cannot be empty";
         }
         return message;
@@ -46,15 +57,15 @@ public class Validator {
                                              String ifscCode,
                                              String panNo) {
         String message="Completed";
-        if(companyName.length() == 0) {
+        if(companyName.isEmpty()) {
             message = "Company Name cannot be empty";
-        } else if (shopName.length() == 0) {
+        } else if (shopName.isEmpty()) {
             message = "Shop name cannot be empty";
-        } else if (accountNumber.length() == 0) {
+        } else if (accountNumber.isEmpty()) {
             message = "Account Number cannot be empty";
-        } else if (ifscCode.length() == 0) {
+        } else if (ifscCode.isEmpty()) {
             message = "IFSC Codecannot be empty";
-        } else if (panNo.length() == 0) {
+        } else if (panNo.isEmpty()) {
             message = "Pan No cannot be empty";
         }
         return  message;
@@ -66,17 +77,25 @@ public class Validator {
                                                       String ifscCode,
                                                       String panNo) {
         String message="Completed";
-        if(companyName.length() == 0) {
+        if(companyName.isEmpty()) {
             message = "Company Name cannot be empty";
-        } else if (shopName.length() == 0) {
+        } else if (shopName.isEmpty()) {
             message = "Shop name cannot be empty";
-        } else if (accountNumber.length() == 0) {
+        } else if (accountNumber.isEmpty()) {
             message = "Account Number cannot be empty";
-        } else if (ifscCode.length() == 0) {
+        } else if (ifscCode.isEmpty()) {
             message = "IFSC Codecannot be empty";
-        } else if (panNo.length() == 0) {
+        } else if (panNo.isEmpty()) {
             message = "Pan No cannot be empty";
         }
         return  message;
     }
+
+    public Boolean emailValidate(String EmailAddress)
+    {
+        emailRegex = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+        return EmailAddress.matches(emailRegex);
+    }
+
+
 }

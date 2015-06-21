@@ -45,7 +45,9 @@
             android:hint="@string/PhoneNumber_hint"
             android:inputType="phone"
             android:numeric="integer"
-            android:phoneNumber="false" />
+            android:phoneNumber="false"
+            android:maxLength="10"
+            />
     </LinearLayout>
 
     <LinearLayout
