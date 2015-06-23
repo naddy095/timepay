@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.InputFilter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,8 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.Utils.ApplyInputFilters;
+
 import com.example.Utils.GroupedInputFormatWatcher;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 public class GeneralPublicRegistration extends ActionBarActivity implements View.OnClickListener{
@@ -103,6 +105,7 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
     public void onClick(View view) {
 
         if (view == expiryMonth) {
+
             final CharSequence[] mnth = {"01(Jan)", "02(Feb)", "03(Mar)", "04(Apr)", "05(May)", "06(Jun)", "07(Jul)", "08(Aug)", "09(Sep)", "10(Oct)", "11(Nov)", "12(Dec)"};
             AlertDialog.Builder builder = new AlertDialog.Builder(GeneralPublicRegistration.this);
             builder.setTitle("Select Month");
@@ -117,13 +120,19 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
             builder.show();
         }
         if (view == expiryYear) {
-            final CharSequence[] yr = {"2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"};
+
+            Integer currentYear=Integer.parseInt(new SimpleDateFormat("yyyy").format(Calendar.getInstance().getTime()));
+            String[] yr= new String[20];
+            for (int x=0;x<20;x++){
+                    yr[x]=currentYear+x+"";
+            }
+            final CharSequence[] yearToDisplay = yr;
             AlertDialog.Builder builder = new AlertDialog.Builder(GeneralPublicRegistration.this);
             builder.setTitle("Select Year");
-            builder.setItems(yr, new DialogInterface.OnClickListener() {
+            builder.setItems(yearToDisplay, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     //Toast.makeText(getApplicationContext(), "You have selected  " + yr[which], Toast.LENGTH_LONG).show();
-                    expiryYear.setText(yr[which]);
+                    expiryYear.setText(yearToDisplay[which]);
                 }
             });
             builder.setInverseBackgroundForced(true);
@@ -131,16 +140,17 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
             builder.show();
         }
         if (view == continueBtn) {
-            Log.i("GPR",expiryYear.getText()+""+expiryMonth.getText());
+            Log.i("GPR", expiryYear.getText() + "" + expiryMonth.getText());
             Validator validator=new Validator();
-            String message=validator.validateGPR(fullName.getText() + "",
-                    address.getText() + "", panNumber.getText() + "",
-                    cardNumber.getText() + "", cardName.getText() + "",
-                    expiryMonth.getText() + "", expiryYear.getText() + "");
-            if (message.equals("Completed")){
-                Toast.makeText(getApplicationContext(),"Completed Successfully",Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+            try {
+                validator.validateGPR(fullName.getText() + "",
+                        address.getText() + "", panNumber.getText() + "",
+                        cardNumber.getText() + "", cardName.getText() + "",
+                        expiryMonth.getText() + "", expiryYear.getText() + "");
+                validator.validateExpiryDate(expiryMonth.getText() + "", expiryYear.getText() + "");
+                Toast.makeText(getApplicationContext(), "Completed Successfully", Toast.LENGTH_SHORT).show();
+            }catch(Exception e){
+                Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }

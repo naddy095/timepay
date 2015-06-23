@@ -1,5 +1,12 @@
 package com.example.timepay.timepay;
 
+import android.util.Log;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 public class Validator {
 
     String emailRegex;
@@ -27,28 +34,27 @@ public class Validator {
         return message;
     }
 
-    public String validateGPR(String fullName,
+    public void validateGPR(String fullName,
                               String address, String panNumber,
                               String cardNumber, String cardName,
-                              String expiryMonth, String expiryYear) {
+                              String expiryMonth, String expiryYear) throws Exception {
 
         String message = "Completed";
         if (fullName.isEmpty()) {
-            message = "Full Name cannot be empty";
+            throw new Exception("Full Name cannot be empty");
         } else if (address.isEmpty()) {
-            message = "Address cannot be empty";
+            throw new Exception("Address cannot be empty");
         } else if (panNumber.isEmpty()) {
-            message = "Pan Number cannot be empty";
+            throw new Exception("Pan Number cannot be empty");
         } else if (cardNumber.isEmpty()) {
-            message = "Card Number cannot be empty";
+            throw new Exception("Card Number cannot be empty");
         } else if (cardName.isEmpty()) {
-            message = "Name on Card cannot be empty";
+            throw new Exception("Name on Card cannot be empty");
         } else if ((expiryMonth.isEmpty()) || (expiryMonth.equals("Month"))) {
-            message = "Expiry Month cannot be empty";
+            throw new Exception("Expiry Month cannot be empty");
         } else if ((expiryYear.isEmpty()) || (expiryYear.equals("Year"))) {
-            message = "Expiry Year cannot be empty";
+            throw new Exception("Expiry Year cannot be empty");
         }
-        return message;
     }
 
     public String validateVendorRegistration(String companyName,
@@ -98,4 +104,18 @@ public class Validator {
     }
 
 
+    public void validateExpiryDate(String expiryMonth, String expiryYear) throws Exception{
+        Calendar calendar=Calendar.getInstance();
+        Integer currentMonthInInteger=Integer.parseInt(new SimpleDateFormat("MM").format(calendar.getTime()));
+        Integer currentYearInInteger=Integer.parseInt(new SimpleDateFormat("yyyy").format(calendar.getTime()));
+        Integer expiryMonthInInteger=Integer.parseInt(expiryMonth.substring(0, 2));
+        Integer expiryYearInInteger=Integer.parseInt(expiryYear);
+
+        Log.i("ExpiryDateRelatedData","ExpiryMonth :"+expiryMonthInInteger+" ExpiryYear :"+expiryYearInInteger);
+        Log.i("CurrentDateRelatedData","CurrentMonth :"+currentMonthInInteger+" CurrentYear :"+currentYearInInteger);
+
+        if ((expiryMonthInInteger<currentMonthInInteger)&&(expiryYearInInteger<=currentYearInInteger)){
+            throw new Exception("Please Enter correct Expiry date");
+        }
+    }
 }
