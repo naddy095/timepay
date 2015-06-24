@@ -29,11 +29,11 @@ public class PrivilageVendorRegistration extends ActionBarActivity implements Vi
     private static final int CAPTURE_IMAGE_FROM_CAMERA = 0;
     private static final int LOAD_IMAGE_FROM_GALLERY=1;
 
-    Button uploadPAN,IFSC,companyID,continueBtn;
+    Button uploadPAN,continueBtn;
     EditText companyName ,shopName ,accountNumber, ifscCode,panNo;
     ImageView imageOfPANCard;
     Intent builderIntent;
-    TextView paymentGatewayLink;
+    TextView paymentGatewayLink,IFSC, companyID;
 
 
     @Override
@@ -47,8 +47,8 @@ public class PrivilageVendorRegistration extends ActionBarActivity implements Vi
     }
     private void initialize()
     {
-       IFSC = (Button)findViewById(R.id.btnPVRIFSCCode);
-       companyID = (Button)findViewById(R.id.btnPVRCompanyID);
+       IFSC = (TextView)findViewById(R.id.tvPVRIFSCCode);
+       companyID = (TextView)findViewById(R.id.tvPVRCompanyID);
         uploadPAN=(Button)findViewById(R.id.btnUploadPAN);
         continueBtn=(Button)findViewById(R.id.bContinue);
         companyName =(EditText)findViewById(R.id.etRegisteredCompanyID);

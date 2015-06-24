@@ -17,7 +17,7 @@
             android:orientation="vertical"
             android:paddingLeft="5dp">
 
-        <TextView
+        <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
@@ -26,7 +26,7 @@
             android:textAppearance="@android:style/TextAppearance.Large"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            android:layout_gravity="center" />
+            android:layout_gravity="center" />-->
 
         <Spinner
             android:id="@+id/spAccountType"

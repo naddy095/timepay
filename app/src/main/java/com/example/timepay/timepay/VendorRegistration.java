@@ -30,10 +30,10 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
     private static final int LOAD_IMAGE_FROM_GALLERY=1;
 
     EditText companyName ,shopName ,accountNumber, ifscCode,panNo;
-    Button uploadPAN ,searchIFSCCode ,continueBtn;
+    Button uploadPAN ,continueBtn;
     ImageView imageOfPANCard;
     Intent builderIntent;
-    TextView paymentGatewayLink;
+    TextView paymentGatewayLink,searchIFSCCode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +51,10 @@ public class VendorRegistration extends ActionBarActivity implements View.OnClic
         companyName=(EditText)findViewById(R.id.etRegisteredCompanyName);
         shopName=(EditText)findViewById(R.id.etShopPublicBrandName);
         accountNumber=(EditText)findViewById(R.id.etAccountNumber);
-        ifscCode=(EditText)findViewById(R.id.etIFSCCode);
+        ifscCode=(EditText)findViewById(R.id.etPVRIFSCCode);
         panNo=(EditText)findViewById(R.id.etPANNumber);
         imageOfPANCard=(ImageView)findViewById(R.id.ivPANImage);
-        searchIFSCCode = (Button)findViewById(R.id.btnIFSCCode);
+        searchIFSCCode = (TextView)findViewById(R.id.tvPVRIFSCCode);
         continueBtn=(Button)findViewById(R.id.bContinue);
         paymentGatewayLink=(TextView)findViewById(R.id.paymentGatewayLink);
 
