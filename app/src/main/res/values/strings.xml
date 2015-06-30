@@ -38,6 +38,9 @@
     <string name="Text_view_IAgree">Terms and Conditions</string>
     <string name="Text_view_CompanyID">Company ID</string>
     <string name="Text_view_IFSC">IFSC CODE</string>
-    
-    
+    <string name="Text_view_AddAccountwithGmail">Add your account with</string>
+    <string name="Button_Cancel">Cancel</string>
+    <string name="Button_OK">OK</string>
+
+
 </resources>
