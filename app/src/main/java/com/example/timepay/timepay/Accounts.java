@@ -1,15 +1,16 @@
 package com.example.timepay.timepay;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.Utils.SharedPreferenceHandler;
 import com.example.componentservices.ComponentBaseServices;
 
@@ -32,6 +34,12 @@ public class Accounts extends ActionBarActivity {
         initializeView();
         openDialogBox();
         emailAddressET.setText(SharedPreferenceHandler.readValue(this,"Mac Address"));
+
+        String code = "+91";
+        phoneNumberET.setCompoundDrawablesWithIntrinsicBounds(new TextDrawable(code), null, null, null);
+        phoneNumberET.setCompoundDrawablePadding(code.length()*23);
+
+
 
         continueB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +107,7 @@ public class Accounts extends ActionBarActivity {
     }
 
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -118,4 +127,45 @@ public class Accounts extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    public class TextDrawable extends Drawable {
+
+        private final String text;
+        private final Paint paint;
+
+        public TextDrawable(String text) {
+            this.text = text;
+            this.paint = new Paint();
+            paint.setColor(Color.BLACK);
+            paint.setTextSize(36f);
+            paint.setAntiAlias(true);
+            paint.setTextAlign(Paint.Align.LEFT);
+        }
+
+        @Override
+        public void draw(Canvas canvas) {
+            canvas.drawText(text, 0, 14, paint);
+        }
+
+        @Override
+        public void setAlpha(int alpha) {
+            paint.setAlpha(alpha);
+        }
+
+        @Override
+        public void setColorFilter(ColorFilter cf) {
+            paint.setColorFilter(cf);
+        }
+
+        @Override
+        public int getOpacity() {
+            return PixelFormat.TRANSLUCENT;
+        }
+    }
+
+
 }
+
+
+
