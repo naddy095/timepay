@@ -41,6 +41,7 @@
     <string name="Text_view_AddAccountwithGmail">Add your account with</string>
     <string name="Button_Cancel">Cancel</string>
     <string name="Button_OK">OK</string>
+    <string name="add_anoather_card">Add Anoather Card</string>
 
 
 </resources>

@@ -1,6 +1,7 @@
 package com.example.timepay.timepay;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,9 +36,7 @@ public class Validator {
     }
 
     public void validateGPR(String fullName,
-                              String address, String panNumber,
-                              String cardNumber, String cardName,
-                              String expiryMonth, String expiryYear) throws Exception {
+                              String address, String panNumber) throws Exception {
 
         String message = "Completed";
         if (fullName.isEmpty()) {
@@ -46,14 +45,6 @@ public class Validator {
             throw new Exception("Address cannot be empty");
         } else if (panNumber.isEmpty()) {
             throw new Exception("Pan Number cannot be empty");
-        } else if (cardNumber.isEmpty()) {
-            throw new Exception("Card Number cannot be empty");
-        } else if (cardName.isEmpty()) {
-            throw new Exception("Name on Card cannot be empty");
-        } else if ((expiryMonth.isEmpty()) || (expiryMonth.equals("Month"))) {
-            throw new Exception("Expiry Month cannot be empty");
-        } else if ((expiryYear.isEmpty()) || (expiryYear.equals("Year"))) {
-            throw new Exception("Expiry Year cannot be empty");
         }
     }
 
@@ -106,16 +97,41 @@ public class Validator {
 
     public void validateExpiryDate(String expiryMonth, String expiryYear) throws Exception{
         Calendar calendar=Calendar.getInstance();
-        Integer currentMonthInInteger=Integer.parseInt(new SimpleDateFormat("MM").format(calendar.getTime()));
-        Integer currentYearInInteger=Integer.parseInt(new SimpleDateFormat("yyyy").format(calendar.getTime()));
-        Integer expiryMonthInInteger=Integer.parseInt(expiryMonth.substring(0, 2));
-        Integer expiryYearInInteger=Integer.parseInt(expiryYear);
+        int currentMonthInInteger=Integer.parseInt(new SimpleDateFormat("MM").format(calendar.getTime()));
+        int currentYearInInteger=Integer.parseInt(new SimpleDateFormat("yyyy").format(calendar.getTime()));
+        int expiryMonthInInteger=Integer.parseInt(expiryMonth);
+        int expiryYearInInteger=Integer.parseInt(expiryYear);
+
 
         Log.i("ExpiryDateRelatedData","ExpiryMonth :"+expiryMonthInInteger+" ExpiryYear :"+expiryYearInInteger);
         Log.i("CurrentDateRelatedData","CurrentMonth :"+currentMonthInInteger+" CurrentYear :"+currentYearInInteger);
+        Log.i("Data",(expiryMonthInInteger<currentMonthInInteger)+"");
+        Log.i("Data",(expiryYearInInteger==currentYearInInteger)+"");
+        Log.i("Data",((expiryMonthInInteger<currentMonthInInteger)&&(expiryYearInInteger==currentYearInInteger))+"");
 
-        if ((expiryMonthInInteger<currentMonthInInteger)&&(expiryYearInInteger<=currentYearInInteger)){
+        if (((expiryMonthInInteger<currentMonthInInteger)&&(expiryYearInInteger==currentYearInInteger))||
+                (expiryYearInInteger<currentYearInInteger)||
+                (expiryYearInInteger-currentYearInInteger>20)||
+                (expiryMonthInInteger>12)){
             throw new Exception("Please Enter correct Expiry date");
+        }
+    }
+
+    public void validateCardEmptyDetails(String cardName, String cardNumber, String expiryMonth, String expiryYear) throws Exception {
+
+        if(cardName.isEmpty()) {
+            throw new Exception("Please Enter Card Name");
+        } else if (cardNumber.isEmpty()) {
+            throw new Exception("Please Enter Card Number");
+        } else if ((expiryMonth.isEmpty())||(expiryMonth.equals("Month"))) {
+            throw new Exception("Please Enter Expiry Month");
+        } else if ((expiryYear.isEmpty())||(expiryYear.equals("Year"))) {
+            throw new Exception("Please Enter Expiry Year");
+        }
+    }
+    public void validateCardNumber(String cardNumber) throws Exception {
+        if (cardNumber.length()<16){
+            throw new Exception("Invalid card no.");
         }
     }
 }

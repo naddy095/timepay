@@ -25,7 +25,6 @@ public class HomePage extends ActionBarActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this,Accounts.class);
                 startActivity(intent);
-                finish();
             }
         });
     }
