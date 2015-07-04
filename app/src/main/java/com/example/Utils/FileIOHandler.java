@@ -29,8 +29,7 @@ public class FileIOHandler {
             fos.write(value.getBytes());
             fos.close();
             flag = true;
-            Toast.makeText(context,filename + " saved",
-                    Toast.LENGTH_LONG).show();
+            //Toast.makeText(context,filename + " saved", Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {e.printStackTrace();  flag = false;}
         catch (IOException e) {e.printStackTrace();  flag = false;}
         return flag;

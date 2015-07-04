@@ -9,11 +9,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +39,7 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
     private static final int LOAD_IMAGE_FROM_GALLERY = 1;
     EditText fullName, cardName, panNumber, address, cardNumber;
     Button continueBtn;
-    TextView expiryMonth, expiryYear, addAnoatherCard;
+    TextView expiryMonth, expiryYear, addAnotherCard;
     Intent builderIntent;
     ListView cardList;
     ArrayAdapter<String> adapter;
@@ -56,7 +60,7 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
         expiryMonth.setOnClickListener(this);
         expiryYear.setOnClickListener(this);
         continueBtn.setOnClickListener(this);
-        addAnoatherCard.setOnClickListener(this);
+        addAnotherCard.setOnClickListener(this);
         /*DatePickerDialog datePickerDialog=new DatePickerDialog(this, listener, year, month, day);
         DatePicker datepicker=datePickerDialog.getDatePicker();
         //datep.removeViewAt(0);
@@ -87,7 +91,7 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
     private void initialize() {
         expiryYear = (TextView) findViewById(R.id.tvExpiryYear);
         expiryMonth = (TextView) findViewById(R.id.tvExpiryMonth);
-        addAnoatherCard = (TextView) findViewById(R.id.tvAddAnoatherCard);
+        addAnotherCard = (TextView) findViewById(R.id.tvAddAnotherCard);
         fullName = (EditText) findViewById(R.id.etFullName);
         cardName = (EditText) findViewById(R.id.etCardFullName);
         panNumber = (EditText) findViewById(R.id.etPANNumber);
@@ -95,12 +99,34 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
         cardNumber = (EditText) findViewById(R.id.etCardNumber);
         cardName = (EditText) findViewById(R.id.etCardFullName);
         continueBtn = (Button) findViewById(R.id.bContinue);
-        cardList = (ListView) findViewById(R.id.lvCards);
+        //cardList = (ListView) findViewById(R.id.lvCards);
         cardNumber.addTextChangedListener(new GroupedInputFormatWatcher(cardNumber));
+
+        cardList = (ListView)findViewById(R.id.lvCards);  // your listview inside scrollview
+        cardList.setOnTouchListener(new ListView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        // Allow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+
+                // Handle ListView touch events.
+                v.onTouchEvent(event);
+                return true;
+            }
+        });
         //ApplyInputFilters applyFilters = new ApplyInputFilters(getString(R.string.AddressCharacterFilter));
         //address.setFilters(new InputFilter[]{applyFilters});
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -157,14 +183,13 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
             builder.create();
             builder.show();
         }
-       else if (view == addAnoatherCard) {
+       else if (view == addAnotherCard) {
 
             try {
                 Validator validator = new Validator();
                 validator.validateGPR(fullName.getText() + "", address.getText() + "", panNumber.getText() + "");
                 validator.validateCardEmptyDetails(cardName.getText() + "", cardNumber.getText() + "", expiryMonth.getText() + "", expiryYear.getText() + "");
                 validator.validateExpiryDate(expiryMonth.getText() + "", expiryYear.getText() + "");
-
                 final Dialog dialog = new Dialog(GeneralPublicRegistration.this);
                 dialog.setContentView(R.layout.dialogbox_add_anoather_card);
                 final TextView cardNameDialog = (TextView) dialog.findViewById(R.id.tvCardNameDialogBox);
@@ -231,8 +256,6 @@ public class GeneralPublicRegistration extends ActionBarActivity implements View
                 validator.validateGPR(fullName.getText() + "", address.getText() + "", panNumber.getText() + "");
                 validator.validateCardEmptyDetails(cardName.getText() + "", cardNumber.getText() + "", expiryMonth.getText() + "", expiryYear.getText() + "");
                 validator.validateExpiryDate(expiryMonth.getText() + "", expiryYear.getText() + "");
-
-
                 CardDetails cardDetails=new CardDetails();
                 cardDetails.setCardName(cardName.getText()+"");
                 cardDetails.setCardNumber(cardNumber.getText() + "");
