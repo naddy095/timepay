@@ -1,6 +1,7 @@
 package com.example.timepay.timepay;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -18,38 +19,32 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.Utils.SharedPreferenceHandler;
-import com.example.componentservices.ComponentBaseServices;
-
 
 public class Accounts extends ActionBarActivity {
     EditText emailAddressET, phoneNumberET;
     Button continueB;
+    String syncedMail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accounts);
 
+        syncedMail=SharedPreferenceHandler.readValue(this, "Synced Mail");
         initializeView();
         openDialogBox();
-        emailAddressET.setText(SharedPreferenceHandler.readValue(this,"Mac Address"));
-
         String code = "+91";
         phoneNumberET.setCompoundDrawablesWithIntrinsicBounds(new TextDrawable(code), null, null, null);
-        phoneNumberET.setCompoundDrawablePadding(code.length()*23);
-
-
+        phoneNumberET.setCompoundDrawablePadding(code.length() * 23);
 
         continueB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Validator validator=new Validator();
-                Log.i("email",emailAddressET.getText()+""+phoneNumberET.getText()+"");
-
+                Log.i("email", emailAddressET.getText() + "" + phoneNumberET.getText() + "");
                 String message= validator.validateAccountDetatis(emailAddressET.getText()+"",phoneNumberET.getText()+"");
-                Log.i("email",message);
+                Log.i("email", message);
                 if (message.equals("Completed")) {
                     Log.i("email","inside account");
                     Intent i = new Intent(Accounts.this, ChooseAccountType.class);
@@ -64,41 +59,38 @@ public class Accounts extends ActionBarActivity {
 
     private void openDialogBox() {
 
-        // Create custom dialog object
-        final Dialog dialog = new Dialog(Accounts.this);
-        // Include dialog.xml file
-        dialog.setContentView(R.layout.dialogboxforemail);
-        // Set dialog title
-        dialog.setTitle("Add your Account with ");
-        TextView eId=(TextView)dialog.findViewById(R.id.tv_emailid);
-        eId.setText(ComponentBaseServices.getEmail(getApplicationContext()));
+        if (!syncedMail.isEmpty()) {
+            // Create custom dialog object
+            final Dialog dialog = new Dialog(Accounts.this);
+            // Include dialog.xml file
+            dialog.setContentView(R.layout.dialogboxforemail);
+            // Set dialog title
+            dialog.setTitle("Add your Account with ");
+            TextView eId = (TextView) dialog.findViewById(R.id.tv_emailid);
+            eId.setText(syncedMail);
+            // set values for custom dialog components - text, image and button
+            //text.setText("Custom dialog Android example.");
+            //image.setImageResource(R.drawable.ic_launcher);
+            dialog.show();
 
-        // set values for custom dialog components - text, image and button
-
-        //text.setText("Custom dialog Android example.");
-        //image.setImageResource(R.drawable.ic_launcher);
-
-        dialog.show();
-
-        final Button cancel = (Button) dialog.findViewById(R.id.btnCancel);
-        final Button ok = (Button) dialog.findViewById(R.id.btnOK);
-        // if decline button is clicked, close the custom dialog
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                emailAddressET.setText(ComponentBaseServices.getEmail(getApplicationContext()));
-                dialog.dismiss();
-            }
-        });
-
+            final Button cancel = (Button) dialog.findViewById(R.id.btnCancel);
+            final Button ok = (Button) dialog.findViewById(R.id.btnOK);
+            // if decline button is clicked, close the custom dialog
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    emailAddressET.setText(syncedMail);
+                    dialog.dismiss();
+                }
+            });
+        }
     }
-
     private void initializeView() {
         emailAddressET = (EditText)findViewById(R.id.etEmailAddress);
         phoneNumberET = (EditText)findViewById(R.id.etPhoneNumber);
