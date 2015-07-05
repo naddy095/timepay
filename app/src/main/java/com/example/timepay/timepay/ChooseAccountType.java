@@ -7,24 +7,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Spinner;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class ChooseAccountType extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
+public class ChooseAccountType extends ActionBarActivity {
 
-    Spinner spAccountType;
-    private String[] Account_Type = {"General Public Registration", "Vendor Registration", "Privilege Vendor Registration"};
+    //Spinner spAccountType;
+   // private String[] Account_Type = {"General Public Registration", "Vendor Registration", "Privilege Vendor Registration"};
     Button bAccountType;
     CheckBox cbIAgree;
     Integer position;
     WebView wvIAccpet;
     TextView tvIAgree;
+    RadioButton rbGPReistration,rbVReistration,rbPVReistration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +31,8 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
         setContentView(R.layout.activity_account_type);
         initializeView();
 
-        //String checkBoxText = "you must agree with the <a href='http://www.google.com' > Terms and Conditions.</a>";
-        //String checkBoxText = "you must agree with the Terms and Conditions.";
-       // tvIAgree.setText(Html.fromHtml(checkBoxText))   ;
+
+
         tvIAgree.setClickable(true);
         tvIAgree.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,10 +45,10 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
             }
         });
 
-        ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Account_Type);
-        adapter_state.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spAccountType.setAdapter(adapter_state);
-        spAccountType.setOnItemSelectedListener(this);
+//        ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Account_Type);
+//        adapter_state.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spAccountType.setAdapter(adapter_state);
+//        spAccountType.setOnItemSelectedListener(this);
 
         bAccountType.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,29 +56,21 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
                 if (cbIAgree.isChecked()) {
                     //Toast.makeText(ChooseAccountType.this, "check box is checked", Toast.LENGTH_LONG).show();
                     Intent i= null;
-                    switch (position) {
 
-                        case 0:
-                            //Toast.makeText(ChooseAccountType.this, "General Public Registration", Toast.LENGTH_SHORT).show();
-                            i = new Intent(ChooseAccountType.this,GeneralPublicRegistration.class);
-                            //i.putExtra("AccountType","GPR");
-                            startActivity(i);
-                            break;
-
-                        case 1:
-                            // Toast.makeText(ChooseAccountType.this, "Vendor Registration", Toast.LENGTH_SHORT).show();
-                            i = new Intent(ChooseAccountType.this,VendorRegistration.class);
-                            //i.putExtra("AccountType","VR");
-                            startActivity(i);
-                            break;
-
-                        case 2:
-                            i = new Intent(ChooseAccountType.this,PrivilageVendorRegistration.class);
-                            startActivity(i);
-                            // Toast.makeText(ChooseAccountType.this, "Privilege Vendor Registration", Toast.LENGTH_SHORT).show();
-                            break;
+                    if(rbGPReistration.isChecked())
+                    {
+                        i = new Intent(ChooseAccountType.this,GeneralPublicRegistration.class);
 
                     }
+                    if(rbVReistration.isChecked())
+                    {
+                        i = new Intent(ChooseAccountType.this,VendorRegistration.class);
+                    }
+                    if (rbPVReistration.isChecked())
+                    {
+                        i = new Intent(ChooseAccountType.this,PrivilageVendorRegistration.class);
+                    }
+                    startActivity(i);
                 } else {
                     Toast.makeText(ChooseAccountType.this, "Please accept terms and conditions", Toast.LENGTH_LONG).show();
                 }
@@ -91,26 +81,29 @@ public class ChooseAccountType extends ActionBarActivity implements AdapterView.
     private void initializeView() {
         bAccountType = (Button) findViewById(R.id.bContinue);
         cbIAgree = (CheckBox) findViewById(R.id.cbIAgree);
-        spAccountType = (Spinner) findViewById(R.id.spAccountType);
         wvIAccpet = (WebView)findViewById(R.id.webview);
-
         tvIAgree= (TextView)findViewById(R.id.tvIAgree);
+        rbGPReistration = (RadioButton)findViewById(R.id.rbGPReistration);
+        rbVReistration = (RadioButton)findViewById(R.id.rbVReistration);
+        rbPVReistration = (RadioButton)findViewById(R.id.rbPVReistration);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        spAccountType.setSelection(i);
-        if(cbIAgree.isChecked())
-        {
-            cbIAgree.toggle();
-        }
-        position = i;
-    }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
 
-    }
+//    @Override
+//    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//        spAccountType.setSelection(i);
+//        if(cbIAgree.isChecked())
+//        {
+//            cbIAgree.toggle();
+//        }
+//        position = i;
+//    }
+
+//    @Override
+//    public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
