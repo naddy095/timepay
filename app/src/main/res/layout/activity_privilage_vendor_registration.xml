@@ -55,18 +55,18 @@
 
                         <TextView
                             android:id="@+id/tvPVRCompanyID"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="20dp"
-                            android:layout_marginLeft="20dp"
-                            android:ems="10"
+                            android:layout_marginLeft="0dp"
+                            android:ems="5"
                             android:textColor="#0000FF"
                             android:text="@string/company_id_hint"
                             android:inputType="text"
                             android:gravity="right"
-                            android:layout_marginRight="5dp" />
+                            android:layout_marginRight="5dp"
+                            android:layout_alignParentRight="true" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -130,18 +130,19 @@
 
                         <TextView
                             android:id="@+id/tvPVRIFSCCode"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="20dp"
-                            android:layout_marginLeft="10dp"
-                            android:ems="10"
+                            android:layout_marginLeft="0dp"
+                            android:ems="4"
                             android:text="@string/ifsc_code_hint"
                             android:inputType="text"
                             android:textColor="#0000FF"
                             android:layout_marginRight="5dp"
-                            android:gravity="right" />
+                            android:gravity="right"
+                            android:layout_alignParentRight="true" />
                     </RelativeLayout>
 
                 </LinearLayout>
