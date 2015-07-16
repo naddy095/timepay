@@ -4,26 +4,26 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:minWidth="@dimen/abc_text_size_subhead_material"
-    android:orientation="vertical"
-    android:nestedScrollingEnabled="false">
+    android:nestedScrollingEnabled="false"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
         android:paddingLeft="5dp"
         android:touchscreenBlocksFocus="false">
 
-       <!-- <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="25dp"
-            android:text="@string/signup_header"
-            android:textAppearance="@android:style/TextAppearance.Large"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />-->
+        <!-- <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="20dp"
+             android:layout_marginTop="25dp"
+             android:text="@string/signup_header"
+             android:textAppearance="@android:style/TextAppearance.Large"
+             android:textColor="@android:color/black"
+             android:textStyle="bold" />-->
 
         <EditText
             android:id="@+id/etEmailAddress"
@@ -44,25 +44,130 @@
             android:ems="10"
             android:hint="@string/PhoneNumber_hint"
             android:inputType="phone"
-            android:numeric="integer"
-            android:phoneNumber="false"
             android:maxLength="10"
-            />
+            android:numeric="integer"
+            android:phoneNumber="false" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center|bottom"
-        android:weightSum="0"
+        android:layout_marginBottom="20dp"
         android:gravity="bottom"
-        android:layout_marginBottom="5dp">
+        android:orientation="vertical"
+        android:weightSum="0">
 
-        <Button
-            android:id="@+id/bContinue"
-            android:text="@string/signup_continue_btn"
-            style="@style/BtContinue"/>
+        <TextView
+            android:id="@+id/tvContinueAsGPR"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:gravity="left|center"
+            android:background="@mipmap/bg"
+            android:layout_marginRight="5dp"
+            android:text="@string/continue_btn_GPR"
+            android:textSize="15dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:background="@android:color/darker_gray"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tvContinueAsVR"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="5dp"
+            android:gravity="left|center"
+            android:background="@mipmap/bg"
+            android:text="@string/continue_btn_VR"
+            android:textSize="15dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:background="@android:color/darker_gray"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tvContinueAsPVR"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="3dp"
+            android:gravity="left|center"
+            android:background="@mipmap/bg"
+            android:text="@string/continue_btn_PVR"
+            android:textSize="15dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_weight="5"
+                android:background="@android:color/black"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/or"
+                android:textSize="20sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_weight="5"
+                android:background="@android:color/black"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/already_account"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/login"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+       <!-- <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/values"
+            android:text="some text"
+            />-->
+
     </LinearLayout>
 
 </LinearLayout>

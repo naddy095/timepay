@@ -21,9 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.Utils.SharedPreferenceHandler;
 
-public class Accounts extends ActionBarActivity {
+public class Accounts extends ActionBarActivity implements View.OnClickListener{
     EditText emailAddressET, phoneNumberET;
-    Button continueB;
+    TextView continueAsGPR,continueAsVR,continueAsPVR;
     String syncedMail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +33,17 @@ public class Accounts extends ActionBarActivity {
         syncedMail=SharedPreferenceHandler.readValue(this, "Synced Mail");
         initializeView();
         openDialogBox();
+        continueAsGPR.setOnClickListener(this);
+        continueAsPVR.setOnClickListener(this);
+        continueAsVR.setOnClickListener(this);
+
+
         String code = "+91";
         phoneNumberET.setCompoundDrawablesWithIntrinsicBounds(new TextDrawable(code), null, null, null);
         phoneNumberET.setCompoundDrawablePadding(code.length() * 23);
-
+/*
         continueB.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
@@ -55,6 +61,7 @@ public class Accounts extends ActionBarActivity {
                 }
             }
         });
+*/
     }
 
     private void openDialogBox() {
@@ -94,11 +101,10 @@ public class Accounts extends ActionBarActivity {
     private void initializeView() {
         emailAddressET = (EditText)findViewById(R.id.etEmailAddress);
         phoneNumberET = (EditText)findViewById(R.id.etPhoneNumber);
-        continueB = (Button)findViewById(R.id.bContinue);
-
+        continueAsGPR = (TextView)findViewById(R.id.tvContinueAsGPR);
+        continueAsVR = (TextView)findViewById(R.id.tvContinueAsVR);
+        continueAsPVR = (TextView)findViewById(R.id.tvContinueAsPVR);
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -120,6 +126,27 @@ public class Accounts extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onClick(View v) {
+        Validator validator=new Validator();
+        Intent intent;
+        String message= validator.validateAccountDetatis(emailAddressET.getText()+"",phoneNumberET.getText()+"");
+        Log.i("email", message);
+        if (message.equals("Completed")) {
+            if (v == continueAsGPR) {
+                intent = new Intent(getApplicationContext(), GeneralPublicRegistration.class);
+                startActivity(intent);
+            } else if (v == continueAsVR) {
+                intent = new Intent(getApplicationContext(), VendorRegistration.class);
+                startActivity(intent);
+            } else if (v == continueAsPVR) {
+                intent = new Intent(getApplicationContext(), PrivilageVendorRegistration.class);
+                startActivity(intent);
+            }
+        }else{
+            Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public class TextDrawable extends Drawable {
 
