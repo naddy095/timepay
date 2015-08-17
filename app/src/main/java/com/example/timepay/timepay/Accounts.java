@@ -17,13 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.Utils.SharedPreferenceHandler;
 
 public class Accounts extends ActionBarActivity implements View.OnClickListener{
     EditText emailAddressET, phoneNumberET;
-    TextView continueAsGPR,continueAsVR,continueAsPVR;
+    RelativeLayout continueAsGPR,continueAsVR,continueAsPVR;
     String syncedMail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +102,9 @@ public class Accounts extends ActionBarActivity implements View.OnClickListener{
     private void initializeView() {
         emailAddressET = (EditText)findViewById(R.id.etEmailAddress);
         phoneNumberET = (EditText)findViewById(R.id.etPhoneNumber);
-        continueAsGPR = (TextView)findViewById(R.id.tvContinueAsGPR);
-        continueAsVR = (TextView)findViewById(R.id.tvContinueAsVR);
-        continueAsPVR = (TextView)findViewById(R.id.tvContinueAsPVR);
+        continueAsGPR = (RelativeLayout)findViewById(R.id.rvContinueAsGPR);
+        continueAsVR = (RelativeLayout)findViewById(R.id.rvContinueAsVendor);
+        continueAsPVR = (RelativeLayout)findViewById(R.id.rvContinueAsPVendor);
     }
 
     @Override
